@@ -6,7 +6,7 @@
 class LtypeFigure : public FigureItem
 {
 public:
-    LtypeFigure(qreal qUnit, GameField* field);
+    LtypeFigure(qreal qUnit, GameField* field, QPointF pos);
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

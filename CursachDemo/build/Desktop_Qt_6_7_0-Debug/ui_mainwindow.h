@@ -29,12 +29,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(829, 1076);
+        MainWindow->resize(829, 933);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName("graphicsView");
-        graphicsView->setGeometry(QRect(30, 10, 770, 980));
+        graphicsView->setGeometry(QRect(30, 10, 693, 882));
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         MainWindow->setCentralWidget(centralwidget);
@@ -50,7 +50,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
     } // retranslateUi
 
 };

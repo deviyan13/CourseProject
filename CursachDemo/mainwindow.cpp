@@ -8,18 +8,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     field = new GameField(ui->graphicsView);
-
-    LtypeFigure* testFigure = new LtypeFigure(field->height() / 14.0, field);
+    qreal qUnit = field->height() / 14.0;
 
     for(int i = 0; i < 3; i++)
     {
-        field->addItem(new LtypeFigure(field->height() / 14.0, field));
-        field->items()[i]->setPos(i * 70, field->height() + 1 - 210);
+        figures.push_back(new LtypeFigure(qUnit, field, QPointF(0.5 * qUnit + i * 4 * qUnit, 10.5 * qUnit)));
+        field->addItem(figures.back());
     }
 
-    testFigure->setPos(0, field->height() + 1 - 210);
-
-    //field->addItem(testFigure);
 }
 
 MainWindow::~MainWindow()

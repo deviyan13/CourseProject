@@ -1,7 +1,8 @@
 #include "ltypefigure.h"
 
-LtypeFigure::LtypeFigure(qreal qUnit, GameField* field) : FigureItem(field)
+LtypeFigure::LtypeFigure(qreal qUnit, GameField* field, QPointF pos) : FigureItem(field, pos)
 {
+    this->setTransformOriginPoint(boundingRect().width() / 2.0, boundingRect().height() / 2.0);
     this->field = field;
     this->qUnit = qUnit;
 }

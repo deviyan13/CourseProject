@@ -2,23 +2,27 @@
 #include "qgraphicsscene.h"
 #include "gamefield.h"
 
-FigureItem::FigureItem(GameField* field)
+FigureItem::FigureItem(GameField* field, QPointF pos)
 {
     this->field = field;
+    this->basePos = pos;
+    setPos(basePos);
+
     this->setZValue(1);
+
+    this->setScale(0.9);
 
     setCursor(Qt::OpenHandCursor);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
 }
 
+FigureItem::~FigureItem(){}
+
 void FigureItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::RightButton)
-    {
+    this->setScale(1);
 
-    }
-
-    else if(event->button() == Qt::LeftButton)
+    if(event->button() == Qt::LeftButton)
     {
         setCursor(Qt::ClosedHandCursor);
         xFromMouse = this->scenePos().x() - event->scenePos().x();
@@ -31,14 +35,21 @@ void FigureItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     setCursor(Qt::OpenHandCursor);
+    this->setScale(0.9);
 
     if(getField()->isAboveAnFigure())
     {
+        deleteLater();
         this->hide();//добавить удаление фигурки!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         getField()->removeItem(this);
         getField()->fillCellsByNewFigure();
-    }
 
+        // emit requestToDelete();
+    }
+    else
+    {
+        setPos(basePos);
+    }
 
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -47,6 +58,7 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     QPointF newPos = QPointF(event->scenePos().x() + xFromMouse, event->scenePos().y() + yFromMouse);
     QRectF sceneRect = getField()->sceneRect();
+
     qUnit = getField()->height() / 14.0;
 
     if (sceneRect.contains(QPoint(newPos.x(), newPos.y())) &&

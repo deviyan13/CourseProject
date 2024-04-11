@@ -10,7 +10,7 @@
 #include <QGraphicsScene>
 #include "typesoffigures.h"
 
-class FigureItem : public QGraphicsItem
+class FigureItem : public QGraphicsItem, public QObject
 {    
 public:
 
@@ -26,7 +26,8 @@ public:
 
     GameField *getField();
 
-    FigureItem(GameField* field);
+    FigureItem(GameField* field, QPointF pos);
+    ~FigureItem();
 
 private:
     qreal xFromMouse, yFromMouse;
@@ -34,6 +35,10 @@ private:
 protected:
     qreal qUnit = 0;
     GameField* field;
+    QPointF basePos;
+
+signals:
+    void requestToDelete();
 };
 
 #endif // FIGUREITEM_H

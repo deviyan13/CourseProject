@@ -22,5 +22,7 @@ public:
 private:
     Ui::MainWindow *ui;
     GameField* field;
+
+    QVector<FigureItem*> figures;
 };
 #endif // MAINWINDOW_H

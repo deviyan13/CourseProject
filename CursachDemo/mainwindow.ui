@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>829</width>
-    <height>1076</height>
+    <height>933</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Game</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="graphicsView">
@@ -19,8 +19,8 @@
      <rect>
       <x>30</x>
       <y>10</y>
-      <width>770</width>
-      <height>980</height>
+      <width>693</width>
+      <height>882</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
