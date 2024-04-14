@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "gamefield.h"
 #include "ltypefigure.h"
+#include "ttypefigure.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,10 +20,21 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void generateThreeFigures();
+
 private:
     Ui::MainWindow *ui;
     GameField* field;
+    QGraphicsScene* scene;
 
     QVector<FigureItem*> figures;
+    int valueOfFiguresOnTheScene;
+
+    qreal qUnit;
+
+    public slots:
+
+    void oneOfFiguresWasPlaced();
+
 };
 #endif // MAINWINDOW_H

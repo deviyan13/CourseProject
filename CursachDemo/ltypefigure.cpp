@@ -2,7 +2,9 @@
 
 LtypeFigure::LtypeFigure(qreal qUnit, GameField* field, QPointF pos) : FigureItem(field, pos)
 {
-    this->setTransformOriginPoint(boundingRect().width() / 2.0, boundingRect().height() / 2.0);
+    this->setTransformOriginPoint(0.5 * qUnit, 1.5 * qUnit);
+    this->setScale(0.9);
+
     this->field = field;
     this->qUnit = qUnit;
 }

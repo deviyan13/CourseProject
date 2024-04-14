@@ -6,7 +6,7 @@ class TypesOfFigures
 public:
     TypesOfFigures();
 
-    enum class type {LType};
+    enum class type {LType, TType};
 };
 
 #endif // TYPESOFFIGURES_H

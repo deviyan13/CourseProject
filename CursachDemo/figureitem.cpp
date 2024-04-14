@@ -5,12 +5,16 @@
 FigureItem::FigureItem(GameField* field, QPointF pos)
 {
     this->field = field;
-    this->basePos = pos;
-    setPos(basePos);
+    this->startPlacePos = pos;
+    setPos(startPlacePos);
 
     this->setZValue(1);
 
-    this->setScale(0.9);
+    relasePlayer = new QMediaPlayer();
+    output = new QAudioOutput();
+    relasePlayer->setAudioOutput(output);
+    relasePlayer->setSource(QUrl::fromLocalFile("../../media/soundFall1.mp3"));
+    output->setVolume(0.3);
 
     setCursor(Qt::OpenHandCursor);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -21,6 +25,7 @@ FigureItem::~FigureItem(){}
 void FigureItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     this->setScale(1);
+    this->setZValue(2);
 
     if(event->button() == Qt::LeftButton)
     {
@@ -34,21 +39,26 @@ void FigureItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    setCursor(Qt::OpenHandCursor);
-    this->setScale(0.9);
-
-    if(getField()->isAboveAnFigure())
+    if(event->button() == Qt::LeftButton)
     {
-        deleteLater();
-        this->hide();//добавить удаление фигурки!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        getField()->removeItem(this);
-        getField()->fillCellsByNewFigure();
+        setCursor(Qt::OpenHandCursor);
+        this->setScale(0.9);
+        this->setZValue(1);
 
-        // emit requestToDelete();
-    }
-    else
-    {
-        setPos(basePos);
+        if(getField()->isAboveAnFigure())
+        {
+            relasePlayer->play();
+            emit isPlaced();
+
+            deleteLater(); //изучить, точно ли удаляется фигрука
+            this->hide();
+            scene()->removeItem(this);
+            getField()->fillCellsByNewFigure();
+        }
+        else
+        {
+            setPos(startPlacePos);
+        }
     }
 
     QGraphicsItem::mouseReleaseEvent(event);
@@ -57,9 +67,9 @@ void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     QPointF newPos = QPointF(event->scenePos().x() + xFromMouse, event->scenePos().y() + yFromMouse);
-    QRectF sceneRect = getField()->sceneRect();
+    QRectF sceneRect = scene()->sceneRect();
 
-    qUnit = getField()->height() / 14.0;
+    qUnit = scene()->height() / 14.0;
 
     if (sceneRect.contains(QPoint(newPos.x(), newPos.y())) &&
         sceneRect.contains(QPoint(newPos.x() + boundingRect().width(), newPos.y())) &&
@@ -69,21 +79,13 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         setPos(newPos.x(), newPos.y());
 
         QPointF currentPos = pos();
-        qreal xIndexOfSquare = round((currentPos.x() - qUnit) / qUnit);
+        qreal xIndexOfSquare = round((currentPos.x() - 2 * qUnit) / qUnit);
         qreal yIndexOfSquare = round((currentPos.y() - qUnit) / qUnit);
 
         if(xIndexOfSquare >= 0 && xIndexOfSquare <= 9 - boundingRect().width() / qUnit &&
-            yIndexOfSquare >= 0 && yIndexOfSquare <= 9 - boundingRect().height() / qUnit &&
-            !getField()->AreCellsFilled(getTypeOfFigure(), xIndexOfSquare, yIndexOfSquare))
+            yIndexOfSquare >= 0 && yIndexOfSquare <= 9 - boundingRect().height() / qUnit)
         {
-            if(this->getTypeOfFigure() == TypesOfFigures::type::LType)
-            {
-                getField()->resetColors();
-                getField()->setShadowForSquare(xIndexOfSquare, yIndexOfSquare);
-                getField()->setShadowForSquare(xIndexOfSquare, yIndexOfSquare + 1);
-                getField()->setShadowForSquare(xIndexOfSquare, yIndexOfSquare + 2);
-                getField()->setShadowForSquare(xIndexOfSquare + 1, yIndexOfSquare + 2);
-            }
+            getField()->setShadowForFigure(getTypeOfFigure(), xIndexOfSquare, yIndexOfSquare);
         }
 
         else
@@ -105,6 +107,14 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             bottomBorder = sceneRect.bottom() - 3 * qUnit;
         }
 
+        else if(getTypeOfFigure() == TypesOfFigures::type::TType)
+        {
+            leftBorder = sceneRect.left();
+            rightBorder = sceneRect.right() - 3 * qUnit;
+            topBorder = sceneRect.top();
+            bottomBorder = sceneRect.bottom() - 2 * qUnit;
+        }
+
         boundedPos.setX(qBound(leftBorder, newPos.x(), rightBorder));
         boundedPos.setY(qBound(topBorder, newPos.y(), bottomBorder));
         this->setPos(boundedPos);
@@ -114,6 +124,19 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     QGraphicsItem::mouseMoveEvent(event);
 }
+
+// void FigureItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+// {
+//     if(event->button() == Qt::LeftButton)
+//     {
+//         setRotation(rotation() + 90);
+//         update();
+//     }
+
+//     qDebug() << boundingRect();
+
+//     QGraphicsItem::mouseDoubleClickEvent(event);
+// }
 
 GameField *FigureItem::getField()
 {

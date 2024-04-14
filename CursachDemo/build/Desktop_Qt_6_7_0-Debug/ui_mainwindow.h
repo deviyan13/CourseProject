@@ -29,18 +29,18 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(829, 933);
+        MainWindow->resize(887, 933);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName("graphicsView");
-        graphicsView->setGeometry(QRect(30, 10, 693, 882));
+        graphicsView->setGeometry(QRect(30, 10, 819, 882));
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 829, 22));
+        menubar->setGeometry(QRect(0, 0, 887, 22));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);

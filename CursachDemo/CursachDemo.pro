@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,6 +14,7 @@ SOURCES += \
     ltypefigure.cpp \
     main.cpp \
     mainwindow.cpp \
+    ttypefigure.cpp \
     typesoffigures.cpp
 
 HEADERS += \
@@ -21,6 +22,7 @@ HEADERS += \
     gamefield.h \
     ltypefigure.h \
     mainwindow.h \
+    ttypefigure.h \
     typesoffigures.h
 
 FORMS += \
@@ -30,3 +32,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

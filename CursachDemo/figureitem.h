@@ -8,12 +8,17 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QCursor>
 #include <QGraphicsScene>
+#include <QMediaPlayer>
 #include "typesoffigures.h"
+#include <QAudioOutput>
+#include <QFileDialog>
+#include <QObject>
 
-class FigureItem : public QGraphicsItem, public QObject
-{    
+class FigureItem : public QObject, public QGraphicsItem
+{
+    Q_OBJECT;
+
 public:
-
     virtual QRectF boundingRect() const override = 0;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override = 0;
     virtual QPainterPath shape() const override = 0;
@@ -21,6 +26,7 @@ public:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    //virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 
     virtual TypesOfFigures::type getTypeOfFigure() = 0;
 
@@ -35,10 +41,13 @@ private:
 protected:
     qreal qUnit = 0;
     GameField* field;
-    QPointF basePos;
+    QPointF startPlacePos;
+
+    QMediaPlayer* relasePlayer;
+    QAudioOutput* output;
 
 signals:
-    void requestToDelete();
+    void isPlaced();
 };
 
 #endif // FIGUREITEM_H
