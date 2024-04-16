@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QWidget>
@@ -23,13 +24,15 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGraphicsView *graphicsView;
+    QLabel *score;
+    QLabel *labelScore;
     QMenuBar *menubar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(887, 933);
+        MainWindow->resize(1021, 933);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);
@@ -37,10 +40,24 @@ public:
         graphicsView->setGeometry(QRect(30, 10, 819, 882));
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        score = new QLabel(centralwidget);
+        score->setObjectName("score");
+        score->setGeometry(QRect(880, 90, 66, 17));
+        QFont font;
+        font.setPointSize(17);
+        score->setFont(font);
+        score->setAlignment(Qt::AlignCenter);
+        labelScore = new QLabel(centralwidget);
+        labelScore->setObjectName("labelScore");
+        labelScore->setGeometry(QRect(880, 70, 66, 17));
+        QFont font1;
+        font1.setPointSize(15);
+        labelScore->setFont(font1);
+        labelScore->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 887, 22));
+        menubar->setGeometry(QRect(0, 0, 1021, 22));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);
@@ -51,6 +68,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
+        score->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        labelScore->setText(QCoreApplication::translate("MainWindow", "SCORE", nullptr));
     } // retranslateUi
 
 };

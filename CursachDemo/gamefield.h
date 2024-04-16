@@ -22,7 +22,7 @@ public:
 
 
 
-    void resetColors();
+    void resetShadowsAndLight();
 
     void setShadowForSquare(int j, int i);
     void setShadowForFigure(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y);
@@ -31,17 +31,28 @@ public:
     bool isAboveAnFigure();
     void fillCellsByNewFigure();
 
-    void searchAndMarkAllStrikes();
+
+    void searchMarkAndDeleteAllStrikes();
     bool isStrikeInTheRow(int row);
     bool isStrikeInTheColumn(int column);
     bool isStrikeInTheSquareWithVertices(int x, int y);
 
+
+    void searchAndLightAllPotentialStrikes();
+    void markPotentialStrikedRow(int row);
+    void markPotentialStrikedColumn(int column);
+    void markPotentialStrikedSquareWithVertices(int x, int y);
+
+
     void deleteAllStrikes();
+    void lightAllPotentialStrikes();
 
-    void fillStrikedRow(int row);
-    void fillStrikedColumn(int column);
-    void fillStrikedSquareWithVertices(int x, int y);
 
+    void markStrikedRow(int row);
+    void markStrikedColumn(int column);
+    void markStrikedSquareWithVertices(int x, int y);
+
+    int getScore();
 
 
 private:
@@ -52,6 +63,11 @@ private:
 
     QMediaPlayer* deletingPlayer;
     QAudioOutput* output;
+
+    int score;
+
+signals:
+    void scoreChanged();
 };
 
 #endif // GAMEFIELD_H

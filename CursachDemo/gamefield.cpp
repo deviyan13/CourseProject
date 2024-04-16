@@ -3,6 +3,7 @@
 GameField::GameField(qreal qUnit)
 {
     this->qUnit = qUnit;
+    score = 0;
 
     deletingPlayer = new QMediaPlayer();
     output = new QAudioOutput();
@@ -64,18 +65,55 @@ void GameField::setShadowForSquare(int j, int i)
         arrayOfBackgroundSquares[i][j]->setBrush(QColor("#B7D7FF"));
     }
 
+    arrayOfFieldFullness[i][j] = 's';
     arrayOfBackgroundSquares[i][j]->setPen(QPen(QColor("#519DFF"), 3));
 }
 
 void GameField::setShadowForFigure(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y)
 {
-    resetColors();
+    resetShadowsAndLight();
 
     if(!AreCellsFilled(coordinatesOfSquares, x, y))
     {
         for(int i = 0; i < coordinatesOfSquares.size(); i++)
         {
             setShadowForSquare(x + coordinatesOfSquares[i].first, y + coordinatesOfSquares[i].second);
+        }
+    }
+
+    searchAndLightAllPotentialStrikes();
+}
+
+void GameField::resetShadowsAndLight()
+{
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            arrayOfBackgroundSquares[i][j]->setPen(QPen(QColor(156, 156, 156), 3));
+            arrayOfBackgroundSquares[i][j]->setBrush(Qt::white);
+
+            if(((i == 3 || i == 4 || i == 5) && (j == 0 || j == 1 || j == 2)) ||
+                ((i == 3 || i == 4 || i == 5) && (j == 6 || j == 7 || j == 8)) ||
+                ((j == 3 || j == 4 || j == 5) && (i == 0 || i == 1 || i == 2)) ||
+                ((j == 3 || j == 4 || j == 5) && (i == 6 || i == 7 || i == 8)))
+            {
+                arrayOfBackgroundSquares[i][j]->setBrush(QColor(235, 235, 235));
+            }
+
+            if(arrayOfFieldFullness[i][j] == 's')
+            {
+                arrayOfFieldFullness[i][j] = '.';
+            }
+
+            if(arrayOfFieldFullness[i][j] == 'l')
+            {
+                arrayOfSetCells[i][j]->setBrush(QColor("#4395FF"));
+                arrayOfSetCells[i][j]->setPen(QPen(QColor("#0E77FF"), 3));
+
+                arrayOfFieldFullness[i][j] = '1';
+            }
+
         }
     }
 }
@@ -90,7 +128,7 @@ bool GameField::AreCellsFilled(QVector<std::pair<int, int>> coordinatesOfSquares
     return false;
 }
 
-void GameField::searchAndMarkAllStrikes()
+void GameField::searchMarkAndDeleteAllStrikes()
 {
     bool areStrikesFound = false;
 
@@ -98,13 +136,13 @@ void GameField::searchAndMarkAllStrikes()
     {
         if(isStrikeInTheRow(i))
         {
-            fillStrikedRow(i);
+            markStrikedRow(i);
             areStrikesFound = true;
         }
 
         if(isStrikeInTheColumn(i))
         {
-            fillStrikedColumn(i);
+            markStrikedColumn(i);
             areStrikesFound = true;
         }
     }
@@ -115,7 +153,7 @@ void GameField::searchAndMarkAllStrikes()
         {
             if(isStrikeInTheSquareWithVertices(j, i))
             {
-                fillStrikedSquareWithVertices(j, i);
+                markStrikedSquareWithVertices(j, i);
                 areStrikesFound = true;
             }
         }
@@ -157,6 +195,40 @@ bool GameField::isStrikeInTheSquareWithVertices(int x, int y)
     return true;
 }
 
+void GameField::searchAndLightAllPotentialStrikes()
+{
+    bool arePotentialStrikesFound = false;
+
+    for(int i = 0; i < 9; i++)
+    {
+        if(isStrikeInTheRow(i))
+        {
+            markPotentialStrikedRow(i);
+            arePotentialStrikesFound = true;
+        }
+
+        if(isStrikeInTheColumn(i))
+        {
+            markPotentialStrikedColumn(i);
+            arePotentialStrikesFound = true;
+        }
+    }
+
+    for(int i = 0; i < 9; i += 3)
+    {
+        for(int j = 0; j < 9; j += 3)
+        {
+            if(isStrikeInTheSquareWithVertices(j, i))
+            {
+                markPotentialStrikedSquareWithVertices(j, i);
+                arePotentialStrikesFound = true;
+            }
+        }
+    }
+
+    if(arePotentialStrikesFound) lightAllPotentialStrikes();
+}
+
 void GameField::deleteAllStrikes()
 {
     QTimer* deleting = new QTimer();
@@ -174,22 +246,42 @@ void GameField::deleteAllStrikes()
                     {
                         deleting->stop();
                         removeFromGroup(arrayOfSetCells[i][j]);
-                        //scene()->removeItem(arrayOfSetCells[i][j]);
                         delete arrayOfSetCells[i][j];
                         arrayOfSetCells[i][j] = nullptr;
                     }
                 });
 
+                score++;
+
                 arrayOfFieldFullness[i][j] = '.';
+                resetShadowsAndLight();
             }
         }
     }
 
     deleting->start(20);
     deletingPlayer->play();
+
+    emit scoreChanged();
 }
 
-void GameField::fillStrikedRow(int row)
+void GameField::lightAllPotentialStrikes()
+{
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(arrayOfFieldFullness[i][j] == 'l')
+            {
+
+                arrayOfSetCells[i][j]->setBrush(QColor("#69ABFF"));
+                //arrayOfSetCells[i][j]->setPen(QPen(QColor("#3A90FF"), 3));
+            }
+        }
+    }
+}
+
+void GameField::markStrikedRow(int row)
 {
     for(int j = 0; j < 9; j++)
     {
@@ -197,7 +289,7 @@ void GameField::fillStrikedRow(int row)
     }
 }
 
-void GameField::fillStrikedColumn(int column)
+void GameField::markStrikedColumn(int column)
 {
     for(int i = 0; i < 9; i++)
     {
@@ -205,7 +297,7 @@ void GameField::fillStrikedColumn(int column)
     }
 }
 
-void GameField::fillStrikedSquareWithVertices(int x, int y)
+void GameField::markStrikedSquareWithVertices(int x, int y)
 {
     for(int i = x; i < x + 3; i++)
     {
@@ -216,22 +308,39 @@ void GameField::fillStrikedSquareWithVertices(int x, int y)
     }
 }
 
-void GameField::resetColors()
+int GameField::getScore()
+{
+    return score;
+}
+
+
+
+void GameField::markPotentialStrikedRow(int row)
+{
+    for(int j = 0; j < 9; j++)
+    {
+        if(arrayOfFieldFullness[row][j] == '1')
+        arrayOfFieldFullness[row][j] = 'l';
+    }
+}
+
+void GameField::markPotentialStrikedColumn(int column)
 {
     for(int i = 0; i < 9; i++)
     {
-        for(int j = 0; j < 9; j++)
-        {
-            arrayOfBackgroundSquares[i][j]->setPen(QPen(QColor(156, 156, 156), 3));
-            arrayOfBackgroundSquares[i][j]->setBrush(Qt::white);
+        if(arrayOfFieldFullness[i][column] == '1')
+        arrayOfFieldFullness[i][column] = 'l';
+    }
+}
 
-            if(((i == 3 || i == 4 || i == 5) && (j == 0 || j == 1 || j == 2)) ||
-                ((i == 3 || i == 4 || i == 5) && (j == 6 || j == 7 || j == 8)) ||
-                ((j == 3 || j == 4 || j == 5) && (i == 0 || i == 1 || i == 2)) ||
-                ((j == 3 || j == 4 || j == 5) && (i == 6 || i == 7 || i == 8)))
-            {
-                arrayOfBackgroundSquares[i][j]->setBrush(QColor(235, 235, 235));
-            }
+void GameField::markPotentialStrikedSquareWithVertices(int x, int y)
+{
+    for(int i = x; i < x + 3; i++)
+    {
+        for(int j = y; j < y + 3; j++)
+        {
+            if(arrayOfFieldFullness[i][j] == '1')
+            arrayOfFieldFullness[i][j] = 'l';
         }
     }
 }
@@ -242,10 +351,12 @@ bool GameField::isAboveAnFigure()
     {
         for(int j = 0; j < 9; j++)
         {
-            if(arrayOfBackgroundSquares[i][j]->brush().color() == "#97C4FF" || arrayOfBackgroundSquares[i][j]->brush().color() == "#B7D7FF")
-            {
-                return true;
-            }
+            if(arrayOfFieldFullness[i][j] == 's') return true;
+
+            // if(arrayOfBackgroundSquares[i][j]->brush().color() == "#97C4FF" || arrayOfBackgroundSquares[i][j]->brush().color() == "#B7D7FF")
+            // {
+            //     return true;
+            // }
         }
     }
 
@@ -258,7 +369,8 @@ void GameField::fillCellsByNewFigure()
     {
         for(int j = 0; j < 9; j++)
         {
-            if(arrayOfBackgroundSquares[i][j]->brush().color() == "#97C4FF" || arrayOfBackgroundSquares[i][j]->brush().color() == "#B7D7FF")
+            //if(arrayOfBackgroundSquares[i][j]->brush().color() == "#97C4FF" || arrayOfBackgroundSquares[i][j]->brush().color() == "#B7D7FF")
+            if(arrayOfFieldFullness[i][j] == 's')
             {
                 arrayOfFieldFullness[i][j] = '1';
                 // arrayOfSetCells[i][j] = new QGraphicsRectItem(2 * qUnit + j * qUnit, qUnit + i * qUnit, qUnit, qUnit);
@@ -276,7 +388,7 @@ void GameField::fillCellsByNewFigure()
         }
     }
 
-    searchAndMarkAllStrikes();
+    resetShadowsAndLight();
 
-    resetColors();
+    searchMarkAndDeleteAllStrikes();
 }

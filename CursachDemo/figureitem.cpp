@@ -64,15 +64,13 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         if(xIndexOfSquare >= 0 && xIndexOfSquare <= 9 - shapeBoundingRect.width() / (1.0 * qUnit) &&
             yIndexOfSquare >= 0 && yIndexOfSquare <= 9 - shapeBoundingRect.height() / (1.0 * qUnit))
         {
-
             UpdateCoordinatesOfSquares();
-
             getField()->setShadowForFigure(leftTopPointsOfSquares, xIndexOfSquare, yIndexOfSquare);
         }
 
         else
         {
-            getField()->resetColors();
+            getField()->resetShadowsAndLight();
         }
     }
     else
@@ -91,7 +89,7 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         this->setPos(boundedPos);
 
-        getField()->resetColors();
+        getField()->resetShadowsAndLight();
     }
 
     QGraphicsItem::mouseMoveEvent(event);

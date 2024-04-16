@@ -14,6 +14,7 @@ SOURCES += \
     ltypefigure.cpp \
     main.cpp \
     mainwindow.cpp \
+    square2typefigure.cpp \
     ttypefigure.cpp \
     typesoffigures.cpp
 
@@ -22,6 +23,7 @@ HEADERS += \
     gamefield.h \
     ltypefigure.h \
     mainwindow.h \
+    square2typefigure.h \
     ttypefigure.h \
     typesoffigures.h
 

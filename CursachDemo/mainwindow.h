@@ -5,6 +5,7 @@
 #include "gamefield.h"
 #include "ltypefigure.h"
 #include "ttypefigure.h"
+#include "square2typefigure.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
