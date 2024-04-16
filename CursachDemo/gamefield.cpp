@@ -59,60 +59,35 @@ void GameField::setShadowForSquare(int j, int i)
     {
         arrayOfBackgroundSquares[i][j]->setBrush(QColor("#97C4FF"));
     }
-    else arrayOfBackgroundSquares[i][j]->setBrush(QColor("#B7D7FF"));
+    else
+    {
+        arrayOfBackgroundSquares[i][j]->setBrush(QColor("#B7D7FF"));
+    }
 
     arrayOfBackgroundSquares[i][j]->setPen(QPen(QColor("#519DFF"), 3));
 }
 
-void GameField::setShadowForFigure(TypesOfFigures::type type, int x, int y)
+void GameField::setShadowForFigure(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y)
 {
     resetColors();
 
-    if(!AreCellsFilled(type, x, y))
+    if(!AreCellsFilled(coordinatesOfSquares, x, y))
     {
-        if(type == TypesOfFigures::type::LType)
+        for(int i = 0; i < coordinatesOfSquares.size(); i++)
         {
-            setShadowForSquare(x, y);
-            setShadowForSquare(x, y + 1);
-            setShadowForSquare(x, y + 2);
-            setShadowForSquare(x + 1, y + 2);
-        }
-
-        else if(type == TypesOfFigures::type::TType)
-        {
-            resetColors();
-            setShadowForSquare(x + 1, y);
-            setShadowForSquare(x, y + 1);
-            setShadowForSquare(x + 1, y + 1);
-            setShadowForSquare(x + 2, y + 1);
+            setShadowForSquare(x + coordinatesOfSquares[i].first, y + coordinatesOfSquares[i].second);
         }
     }
-
-
-
 }
 
-bool GameField::AreCellsFilled(TypesOfFigures::type type, int x, int y)
+bool GameField::AreCellsFilled(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y)
 {
-    if(type == TypesOfFigures::type::LType)
+    for(int i = 0; i < coordinatesOfSquares.size(); i++)
     {
-        if(arrayOfFieldFullness[y][x] == '1') return true;
-        if(arrayOfFieldFullness[y + 1][x] == '1') return true;
-        if(arrayOfFieldFullness[y + 2][x] == '1') return true;
-        if(arrayOfFieldFullness[y + 2][x + 1] == '1') return true;
-
-        return false;
+        if(arrayOfFieldFullness[y + coordinatesOfSquares[i].second][x + coordinatesOfSquares[i].first] != '.') return true;
     }
 
-    else if(type == TypesOfFigures::type::TType)
-    {
-        if(arrayOfFieldFullness[y][x + 1] == '1') return true;
-        if(arrayOfFieldFullness[y + 1][x] == '1') return true;
-        if(arrayOfFieldFullness[y + 1][x + 1] == '1') return true;
-        if(arrayOfFieldFullness[y + 1][x + 2] == '1') return true;
-
-        return false;
-    }
+    return false;
 }
 
 void GameField::searchAndMarkAllStrikes()

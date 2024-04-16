@@ -3,5 +3,7 @@
         <file>media/chpok-nays.wav</file>
         <file>media/soundFall.mp3</file>
         <file>media/soundFall1.mp3</file>
+        <file>media/lol.mp3</file>
+        <file>media/hello.mp3</file>
     </qresource>
 </RCC>

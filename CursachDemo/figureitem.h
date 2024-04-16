@@ -26,9 +26,11 @@ public:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-    //virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 
     virtual TypesOfFigures::type getTypeOfFigure() = 0;
+    virtual void UpdateCoordinatesOfSquares();
+
 
     GameField *getField();
 
@@ -42,6 +44,8 @@ protected:
     qreal qUnit = 0;
     GameField* field;
     QPointF startPlacePos;
+
+    QVector<std::pair<int, int>> leftTopPointsOfSquares;;
 
     QMediaPlayer* relasePlayer;
     QAudioOutput* output;

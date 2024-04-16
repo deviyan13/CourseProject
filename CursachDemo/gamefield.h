@@ -25,9 +25,9 @@ public:
     void resetColors();
 
     void setShadowForSquare(int j, int i);
-    void setShadowForFigure(TypesOfFigures::type type, int x, int y);
+    void setShadowForFigure(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y);
 
-    bool AreCellsFilled(TypesOfFigures::type type, int x, int y);
+    bool AreCellsFilled(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y);
     bool isAboveAnFigure();
     void fillCellsByNewFigure();
 

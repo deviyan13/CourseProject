@@ -11,7 +11,7 @@ TtypeFigure::TtypeFigure(qreal qUnit, GameField* field, QPointF pos) : FigureIte
 
 QRectF TtypeFigure::boundingRect() const
 {
-    return QRectF(0, 0, 3 * qUnit, 2 * qUnit);
+    return QRectF(0, 0, 3 * qUnit, 3 * qUnit);
 }
 
 void TtypeFigure::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -20,10 +20,10 @@ void TtypeFigure::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setPen(QPen(QColor("#0E77FF"), 3));
 
 
-    painter->drawRect(qUnit, 0, qUnit, qUnit);
-    painter->drawRect(0, qUnit, qUnit, qUnit);
     painter->drawRect(qUnit, qUnit, qUnit, qUnit);
-    painter->drawRect(2 * qUnit, qUnit, qUnit, qUnit);
+    painter->drawRect(0, 2 * qUnit, qUnit, qUnit);
+    painter->drawRect(qUnit, 2 * qUnit, qUnit, qUnit);
+    painter->drawRect(2 * qUnit, 2 * qUnit, qUnit, qUnit);
 
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -37,10 +37,10 @@ TypesOfFigures::type TtypeFigure::getTypeOfFigure()
 QPainterPath TtypeFigure::shape() const
 {
     QPainterPath path;
-    path.addRect(1 * qUnit, 0, qUnit, qUnit);
-    path.addRect(0, qUnit, qUnit, qUnit);
     path.addRect(1 * qUnit, qUnit, qUnit, qUnit);
-    path.addRect(2 * qUnit, qUnit, qUnit, qUnit);
+    path.addRect(0, 2 * qUnit, qUnit, qUnit);
+    path.addRect(1 * qUnit, 2 * qUnit, qUnit, qUnit);
+    path.addRect(2 * qUnit, 2 * qUnit, qUnit, qUnit);
 
     return path;
 }

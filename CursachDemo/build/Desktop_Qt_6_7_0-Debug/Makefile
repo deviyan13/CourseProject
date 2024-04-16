@@ -1181,6 +1181,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../../resources.qrc \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/libexec/rcc \
+		../../media/hello.mp3 \
+		../../media/lol.mp3 \
 		../../media/soundFall1.mp3 \
 		../../media/soundFall.mp3 \
 		../../media/chpok-nays.wav

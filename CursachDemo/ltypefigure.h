@@ -17,6 +17,7 @@ public:
 
 private:
     qreal qUnit = 0;
+
 };
 
 #endif // LTYPEFIGURE_H
