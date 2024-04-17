@@ -9,21 +9,33 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bigltypefigure.cpp \
     figureitem.cpp \
     gamefield.cpp \
+    inverseltypefigure.cpp \
+    inversestypefigure.cpp \
     ltypefigure.cpp \
     main.cpp \
     mainwindow.cpp \
+    miniltypefigure.cpp \
     square2typefigure.cpp \
+    stick4typefigure.cpp \
+    stypefigure.cpp \
     ttypefigure.cpp \
     typesoffigures.cpp
 
 HEADERS += \
+    bigltypefigure.h \
     figureitem.h \
     gamefield.h \
+    inverseltypefigure.h \
+    inversestypefigure.h \
     ltypefigure.h \
     mainwindow.h \
+    miniltypefigure.h \
     square2typefigure.h \
+    stick4typefigure.h \
+    stypefigure.h \
     ttypefigure.h \
     typesoffigures.h
 

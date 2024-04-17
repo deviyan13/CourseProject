@@ -6,6 +6,11 @@
 #include "ltypefigure.h"
 #include "ttypefigure.h"
 #include "square2typefigure.h"
+#include "miniltypefigure.h"
+#include "inverseltypefigure.h"
+#include "stypefigure.h"
+#include "inversestypefigure.h"
+#include "stick4typefigure.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -48,7 +48,7 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     QRectF shapeBoundingRect = mapToScene(shape().boundingRect()).boundingRect();
     QPointF topLeftShape = shapeBoundingRect.topLeft();
 
-    qUnit = scene()->height() / 14.0;
+    qUnit = scene()->height() / 15.0;
 
     QRectF newShapeRect = QRectF(newPos.x() + (shapeBoundingRect.x() - sceneBoundingRect().x()),
                                newPos.y() + (shapeBoundingRect.y() - sceneBoundingRect().y()),
@@ -58,8 +58,12 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         setPos(newPos.x(), newPos.y());
 
+        shapeBoundingRect = mapToScene(shape().boundingRect()).boundingRect();
+        topLeftShape = shapeBoundingRect.topLeft();
+
         qreal xIndexOfSquare = round((topLeftShape.x() - 2.0 * qUnit) / qUnit);
         qreal yIndexOfSquare = round((topLeftShape.y() - 1.0 * qUnit) / qUnit);
+
 
         if(xIndexOfSquare >= 0 && xIndexOfSquare <= 9 - shapeBoundingRect.width() / (1.0 * qUnit) &&
             yIndexOfSquare >= 0 && yIndexOfSquare <= 9 - shapeBoundingRect.height() / (1.0 * qUnit))
@@ -127,7 +131,9 @@ void FigureItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        setRotation(rotation() + 90);
+        setRotation((rotation() + 90));
+        if(rotation() >= 360) setRotation(rotation() - 360);
+
         UpdateCoordinatesOfSquares();
     }
 
@@ -141,9 +147,9 @@ void FigureItem::UpdateCoordinatesOfSquares()
     path.moveTo(0,0);
 
     leftTopPointsOfSquares.clear();
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < boundingRect().height(); i++)
     {
-        for(int j = 0; j < 3; j++)
+        for(int j = 0; j < boundingRect().width(); j++)
         {
             if(path.contains(QRectF(shapeBoundingRect.x() + j * qUnit + 1, shapeBoundingRect.y() + i * qUnit + 1, qUnit - 2, qUnit - 2)))
             {

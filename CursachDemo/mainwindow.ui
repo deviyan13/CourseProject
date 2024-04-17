@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1021</width>
-    <height>933</height>
+    <height>992</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>30</x>
       <y>10</y>
       <width>819</width>
-      <height>882</height>
+      <height>945</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
