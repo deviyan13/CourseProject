@@ -15,6 +15,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,38 +27,48 @@ public:
     QGraphicsView *graphicsView;
     QLabel *score;
     QLabel *labelScore;
+    QPushButton *pushButton;
     QMenuBar *menubar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1021, 992);
+        MainWindow->resize(1600, 1000);
+        MainWindow->setMinimumSize(QSize(1600, 1000));
+        MainWindow->setMaximumSize(QSize(1600, 1000));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName("graphicsView");
-        graphicsView->setGeometry(QRect(30, 10, 819, 945));
+        graphicsView->setGeometry(QRect(390, -10, 819, 945));
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         score = new QLabel(centralwidget);
         score->setObjectName("score");
-        score->setGeometry(QRect(880, 90, 66, 17));
+        score->setGeometry(QRect(1250, 80, 66, 17));
         QFont font;
         font.setPointSize(17);
         score->setFont(font);
         score->setAlignment(Qt::AlignCenter);
         labelScore = new QLabel(centralwidget);
         labelScore->setObjectName("labelScore");
-        labelScore->setGeometry(QRect(880, 70, 66, 17));
+        labelScore->setGeometry(QRect(1250, 60, 66, 17));
         QFont font1;
         font1.setPointSize(15);
         labelScore->setFont(font1);
         labelScore->setAlignment(Qt::AlignCenter);
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(1260, 840, 311, 81));
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("NotoSerifTamilSlanted Medium")});
+        font2.setPointSize(28);
+        pushButton->setFont(font2);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1021, 22));
+        menubar->setGeometry(QRect(0, 0, 1600, 22));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);
@@ -70,6 +81,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
         score->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelScore->setText(QCoreApplication::translate("MainWindow", "SCORE", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264 \320\262 \320\274\320\265\320\275\321\216", nullptr));
     } // retranslateUi
 
 };

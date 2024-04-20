@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+
 #include "gamefield.h"
 #include "ltypefigure.h"
 #include "ttypefigure.h"
@@ -38,9 +40,14 @@ private:
 
     qreal qUnit;
 
-    public slots:
+public slots:
 
     void oneOfFiguresWasPlaced();
 
+signals:
+    void exit();
+
+private slots:
+    void on_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

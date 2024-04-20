@@ -10,12 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     bigltypefigure.cpp \
+    dialogaboutgame.cpp \
     figureitem.cpp \
     gamefield.cpp \
     inverseltypefigure.cpp \
     inversestypefigure.cpp \
     ltypefigure.cpp \
     main.cpp \
+    mainmenu.cpp \
     mainwindow.cpp \
     miniltypefigure.cpp \
     square2typefigure.cpp \
@@ -26,11 +28,13 @@ SOURCES += \
 
 HEADERS += \
     bigltypefigure.h \
+    dialogaboutgame.h \
     figureitem.h \
     gamefield.h \
     inverseltypefigure.h \
     inversestypefigure.h \
     ltypefigure.h \
+    mainmenu.h \
     mainwindow.h \
     miniltypefigure.h \
     square2typefigure.h \
@@ -40,6 +44,8 @@ HEADERS += \
     typesoffigures.h
 
 FORMS += \
+    dialogaboutgame.ui \
+    mainmenu.ui \
     mainwindow.ui
 
 # Default rules for deployment.

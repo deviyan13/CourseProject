@@ -4,6 +4,7 @@
 
 FigureItem::FigureItem(GameField* field, QPointF pos)
 {
+    isLive = true;
     this->field = field;
     this->startPlacePos = pos;
     setPos(startPlacePos);
@@ -68,7 +69,7 @@ void FigureItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         if(xIndexOfSquare >= 0 && xIndexOfSquare <= 9 - shapeBoundingRect.width() / (1.0 * qUnit) &&
             yIndexOfSquare >= 0 && yIndexOfSquare <= 9 - shapeBoundingRect.height() / (1.0 * qUnit))
         {
-            UpdateCoordinatesOfSquares();
+            //UpdateCoordinatesOfSquares();
             getField()->setShadowForFigure(leftTopPointsOfSquares, xIndexOfSquare, yIndexOfSquare);
         }
 
@@ -111,12 +112,14 @@ void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         {
             relasePlayer->setSource(QUrl::fromLocalFile("../../media/soundFall1.mp3"));
             relasePlayer->play();
-            emit isPlaced();
 
-            deleteLater();
+            getField()->fillCellsByNewFigure();
+
+            setLive(false);
+            //deleteLater();
+            emit isPlaced();
             this->hide();
             scene()->removeItem(this);
-            getField()->fillCellsByNewFigure();
         }
         else
         {
@@ -142,14 +145,17 @@ void FigureItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 
 void FigureItem::UpdateCoordinatesOfSquares()
 {
+    this->setScale(1);
     QRectF shapeBoundingRect = mapToScene(shape().boundingRect()).boundingRect();
     QPainterPath path = mapToScene(shape());
+
+    qUnit = scene()->height() / 15.0;
     path.moveTo(0,0);
 
     leftTopPointsOfSquares.clear();
-    for(int i = 0; i < boundingRect().height(); i++)
+    for(int i = 0; i < shapeBoundingRect.height() / qUnit; i++)
     {
-        for(int j = 0; j < boundingRect().width(); j++)
+        for(int j = 0; j < shapeBoundingRect.width() / qUnit; j++)
         {
             if(path.contains(QRectF(shapeBoundingRect.x() + j * qUnit + 1, shapeBoundingRect.y() + i * qUnit + 1, qUnit - 2, qUnit - 2)))
             {
@@ -157,6 +163,48 @@ void FigureItem::UpdateCoordinatesOfSquares()
             }
         }
     }
+    this->setScale(0.9);
+}
+
+bool FigureItem::isCanBePlaced()
+{
+    qreal startRotation = this->rotation();
+    qUnit = scene()->height() / 15;
+
+    for(int r = 0; r < 4; r++)
+    {
+        this->setRotation(r * 90);
+        UpdateCoordinatesOfSquares();
+        QRectF shapeBoundingRect = mapToScene(shape().boundingRect()).boundingRect();
+
+        for(int i = 0; i < 9 - shapeBoundingRect.height() / qUnit; i++)
+        {
+            for(int j = 0; j < 9 - shapeBoundingRect.width() / qUnit; j++)
+            {
+                if(!getField()->AreCellsFilled(leftTopPointsOfSquares, j, i))
+                {
+                    setRotation(startRotation);
+                    UpdateCoordinatesOfSquares();
+
+                    return true;
+                }
+            }
+        }
+    }
+
+    setRotation(startRotation);
+    UpdateCoordinatesOfSquares();
+    return false;
+}
+
+void FigureItem::setLive(bool live)
+{
+    isLive = live;
+}
+
+bool FigureItem::getIsLive()
+{
+    return isLive;
 }
 
 GameField *FigureItem::getField()

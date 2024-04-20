@@ -241,6 +241,7 @@ void GameField::deleteAllStrikes()
             {
                 connect(deleting, &QTimer::timeout, [=](){
                     arrayOfSetCells[i][j]->setScale(arrayOfSetCells[i][j]->scale() - 0.1);
+                    arrayOfSetCells[i][j]->setRotation(arrayOfSetCells[i][j]->rotation() + 5);
 
                     if(arrayOfSetCells[i][j]->scale() < 0.1)
                     {

@@ -5,5 +5,7 @@
         <file>media/soundFall1.mp3</file>
         <file>media/lol.mp3</file>
         <file>media/hello.mp3</file>
+        <file>media/tetris-background.gif</file>
+        <file>media/back.jpg</file>
     </qresource>
 </RCC>

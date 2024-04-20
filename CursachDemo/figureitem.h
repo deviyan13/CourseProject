@@ -31,6 +31,9 @@ public:
     virtual TypesOfFigures::type getTypeOfFigure() = 0;
     virtual void UpdateCoordinatesOfSquares();
 
+    bool isCanBePlaced();
+    void setLive(bool live);
+    bool getIsLive();
 
     GameField *getField();
 
@@ -44,6 +47,7 @@ protected:
     qreal qUnit = 0;
     GameField* field;
     QPointF startPlacePos;
+    bool isLive;
 
     QVector<std::pair<int, int>> leftTopPointsOfSquares;;
 

@@ -20,13 +20,55 @@ MainWindow::MainWindow(QWidget *parent)
 
     });
 
+    // Фон для graphicsView
+    QRadialGradient gradient(ui->graphicsView->rect().center(), 500);
+    gradient.setColorAt(0, QColor(255, 255, 255));
+    gradient.setColorAt(1, QColor(147, 191, 255, 120));
+    ui->graphicsView->setBackgroundBrush(QBrush(gradient));
+
+    scene->update();
+    field->resetShadowsAndLight();
+
     scene->addItem(field);
     ui->graphicsView->setScene(scene);
 
     valueOfFiguresOnTheScene = 0;
     generateThreeFigures();
 
-    }
+
+    setStyleSheet("MainWindow {background-color: "
+                  "qradialgradient(cx: 0.5, cy: 0.5, radius: 1, "
+                  "fx: 0.5, fy: 0.5, "
+                  "stop: 0 rgba(255, 255, 255, 255), stop: 1 rgba(147, 191, 255, 255)); }"
+
+
+
+                  "QPushButton { "
+                  "background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, "
+                  "fx: 0.5, fy: 0.5, "
+                  "stop: 0 rgba(180, 210, 255, 255), stop: 1 rgba(128, 178, 255, 255)); "
+                  "color: white; "
+                  "padding: 10px 20px; "
+                  "border-radius: 20%; "
+                  "} "
+
+                  "QPushButton:hover { "
+                  "background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, "
+                  "fx: 0.5, fy: 0.5, "
+                  "stop: 0 rgba(128, 178, 255, 200), stop: 1 rgba(76, 146, 255, 200)); "
+                  "} "
+
+                  "QPushButton:pressed { "
+                  "background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, "
+                  "fx: 0.5, fy: 0.5, "
+                  "stop: 0 rgba(180, 210, 255, 255), stop: 1 rgba(128, 178, 255, 255)); "
+                  "}"
+
+
+                  );
+
+}
+
 
 MainWindow::~MainWindow()
 {
@@ -35,6 +77,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::generateThreeFigures()
 {
+    figures.clear();
     valueOfFiguresOnTheScene = 3;
 
     for(int i = 0; i < 3; i++)
@@ -75,22 +118,46 @@ void MainWindow::generateThreeFigures()
         }
 
 
-        figures.back()->setRotation((rand() % 4) * 90);
-        figures.back()->UpdateCoordinatesOfSquares();
-
+        scene->addItem(figures.back());
         connect(figures.back(), &FigureItem::isPlaced, this, &MainWindow::oneOfFiguresWasPlaced);
 
-
-        scene->addItem(figures.back());
+        figures.back()->setRotation((rand() % 4) * 90);
+        figures.back()->UpdateCoordinatesOfSquares();
     }
 }
 
 void MainWindow::oneOfFiguresWasPlaced()
 {
+    int countOfFiguresCannotBePlaced = 0;
     valueOfFiguresOnTheScene--;
 
     if(valueOfFiguresOnTheScene == 0)
     {
         generateThreeFigures();
     }
+
+    for(int i = 0; i < figures.size(); i++)
+    {
+        if(!figures[i]->getIsLive())
+        {
+            figures.remove(i);
+        }
+    }
+
+    for(int i = 0; i < figures.size(); i++)
+    {
+        if(!figures[i]->isCanBePlaced())
+        {
+            countOfFiguresCannotBePlaced++;
+        }
+    }
+
+    if(valueOfFiguresOnTheScene == countOfFiguresCannotBePlaced)
+        QTimer::singleShot(10, [=](){QMessageBox::information(this, "title", "you lose!");});
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    emit exit();
+}
+
