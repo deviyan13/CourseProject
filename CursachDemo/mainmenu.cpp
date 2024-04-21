@@ -13,7 +13,8 @@ MainMenu::MainMenu(QWidget *parent)
     setStyleSheet("MainMenu {background-color: "
                   "qradialgradient(cx: 0.5, cy: 0.5, radius: 1, "
                   "fx: 0.5, fy: 0.5, "
-                  "stop: 0 rgba(97, 166, 255, 255), stop: 1 rgba(34, 128, 255, 255)); }"
+                  "stop: 0 rgba(97, 166, 255, 255), stop: 1 rgba(34, 128, 255, 255)); "
+                  "color:white;}"
 
 
                   "QPushButton { "

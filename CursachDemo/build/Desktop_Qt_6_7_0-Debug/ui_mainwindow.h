@@ -50,7 +50,9 @@ public:
         score->setObjectName("score");
         score->setGeometry(QRect(1240, 370, 331, 101));
         QFont font;
-        font.setPointSize(49);
+        font.setFamilies({QString::fromUtf8("Noto Kufi Arabic")});
+        font.setPointSize(50);
+        font.setBold(true);
         score->setFont(font);
         score->setAlignment(Qt::AlignCenter);
         labelScore = new QLabel(centralwidget);
@@ -78,6 +80,7 @@ public:
         font3.setPointSize(32);
         font3.setBold(true);
         labelRecord->setFont(font3);
+        labelRecord->setStyleSheet(QString::fromUtf8(""));
         labelRecord->setAlignment(Qt::AlignCenter);
         labelRecord->setWordWrap(true);
         record = new QLabel(centralwidget);

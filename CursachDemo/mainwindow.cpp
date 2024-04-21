@@ -47,7 +47,13 @@ MainWindow::MainWindow(QWidget *parent)
     setStyleSheet("MainWindow {background-color: "
                   "qradialgradient(cx: 0.5, cy: 0.5, radius: 1, "
                   "fx: 0.5, fy: 0.5, "
-                  "stop: 0 rgba(255, 255, 255, 255), stop: 1 rgba(147, 191, 255, 255)); }"
+                  "stop: 0 rgba(255, 255, 255, 255), stop: 1 rgba(147, 191, 255, 255)); "
+                  "color: white;"
+                  "}"
+
+                  "QLabel {"
+                  "color: rgb(60, 138, 255);"
+                  "}"
 
 
 

@@ -53,7 +53,9 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>49</pointsize>
+      <family>Noto Kufi Arabic</family>
+      <pointsize>50</pointsize>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -124,6 +126,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
      <string>РЕКОРД</string>
     </property>
@@ -145,7 +150,9 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>49</pointsize>
+      <family>Noto Kufi Arabic</family>
+      <pointsize>50</pointsize>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">

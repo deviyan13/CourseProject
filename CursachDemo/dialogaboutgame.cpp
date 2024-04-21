@@ -12,6 +12,9 @@ DialogAboutGame::DialogAboutGame(QWidget *parent)
                   "fx: 0.5, fy: 0.5, "
                   "stop: 0 rgba(97, 166, 255, 255), stop: 1 rgba(34, 128, 255, 255)); }"
 
+                  "QLabel {"
+                  "color: white;"
+                  "}"
 
                   "QPushButton { "
                   "background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5, "
