@@ -57,6 +57,8 @@ public:
     //for saving
     int getScore();
     void setScore(int score);
+    int getRecord();
+    void setRecord(int record);
 
     QVector <QString> getArrayOfFieldFullness();
     void setFieldFullness(QVector<QString> stringsOfField);
@@ -71,10 +73,11 @@ private:
     QMediaPlayer* deletingPlayer;
     QAudioOutput* output;
 
-    int score;
+    int score, record;
 
 signals:
     void scoreChanged();
+    void recordChanged();
 };
 
 #endif // GAMEFIELD_H

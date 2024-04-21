@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     bigltypefigure.cpp \
     dialogaboutgame.cpp \
+    dialogaboutloss.cpp \
     dialogchoosinggamestart.cpp \
     figureitem.cpp \
     gamefield.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 HEADERS += \
     bigltypefigure.h \
     dialogaboutgame.h \
+    dialogaboutloss.h \
     dialogchoosinggamestart.h \
     figureitem.h \
     gamefield.h \
@@ -47,6 +49,7 @@ HEADERS += \
 
 FORMS += \
     dialogaboutgame.ui \
+    dialogaboutloss.ui \
     dialogchoosinggamestart.ui \
     mainmenu.ui \
     mainwindow.ui

@@ -33,6 +33,7 @@ public:
 
     void clearGame();
     void updateRecord();
+    void loadRecord();
 
     void startNewGame();
     void generateThreeFigures();

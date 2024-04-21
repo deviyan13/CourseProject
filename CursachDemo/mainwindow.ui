@@ -45,15 +45,15 @@
    <widget class="QLabel" name="score">
     <property name="geometry">
      <rect>
-      <x>1250</x>
-      <y>80</y>
-      <width>66</width>
-      <height>17</height>
+      <x>1240</x>
+      <y>370</y>
+      <width>331</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>17</pointsize>
+      <pointsize>49</pointsize>
      </font>
     </property>
     <property name="text">
@@ -66,22 +66,27 @@
    <widget class="QLabel" name="labelScore">
     <property name="geometry">
      <rect>
-      <x>1250</x>
-      <y>60</y>
-      <width>66</width>
-      <height>17</height>
+      <x>1160</x>
+      <y>290</y>
+      <width>501</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>15</pointsize>
+      <family>Noto Kufi Arabic</family>
+      <pointsize>25</pointsize>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>SCORE</string>
+     <string>КОЛИЧЕСТВО ОЧКОВ</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="exitButton">
@@ -101,6 +106,53 @@
     </property>
     <property name="text">
      <string>Выход в меню</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelRecord">
+    <property name="geometry">
+     <rect>
+      <x>1240</x>
+      <y>30</y>
+      <width>331</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Kufi Arabic</family>
+      <pointsize>32</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>РЕКОРД</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="record">
+    <property name="geometry">
+     <rect>
+      <x>1240</x>
+      <y>130</y>
+      <width>331</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>49</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

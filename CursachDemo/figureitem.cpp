@@ -113,10 +113,12 @@ void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             relasePlayer->setSource(QUrl::fromLocalFile("../../media/soundFall1.mp3"));
             relasePlayer->play();
 
+            //добавляем кол-во очков в виде кол-ва заполненных квадратов
+
+
             getField()->fillCellsByNewFigure();
 
             setLive(false);
-            //deleteLater();
             emit isPlaced();
             this->hide();
             scene()->removeItem(this);

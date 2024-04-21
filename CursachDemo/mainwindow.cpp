@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "dialogaboutloss.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,11 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     field = new GameField(qUnit);
 
-    connect(field, &GameField::scoreChanged, [=](){
-
-        ui->score->setText(QString::number(field->getScore()));
-
-    });
 
     scene->update();
     field->resetShadowsAndLight();
@@ -27,6 +23,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene);
 
     valueOfFiguresOnTheScene = 0;
+
+
+
+    connect(field, &GameField::scoreChanged, [=](){
+        ui->score->setText(QString::number(field->getScore()));
+    });
+
+    connect(field, &GameField::recordChanged, [=](){
+        ui->record->setText(QString::number(field->getRecord()));
+
+        updateRecord();
+    });
+
 
 
     // Фон для graphicsView
@@ -104,15 +113,29 @@ void MainWindow::updateRecord()
     }
 }
 
+void MainWindow::loadRecord()
+{
+    QFile recordFile("../../files/record.txt");
+    if (!recordFile.open(QIODevice::ReadWrite)) {
+        throw QFileDevice::OpenError;
+    }
+
+    QTextStream inResult(&recordFile);
+    int result;
+    inResult >> result;
+    field->setRecord(result);
+
+    recordFile.close();
+}
+
 void MainWindow::startNewGame()
 {
     clearGame();
-
     field->setScore(0);
-    field->scoreChanged();
 
     valueOfFiguresOnTheScene = 0;
     generateThreeFigures();
+    loadRecord();
 }
 
 void MainWindow::generateThreeFigures()
@@ -188,12 +211,12 @@ void MainWindow::loadGameFromFile()
     }
 
     QTextStream in(&file);
-    // ставим очки
+
     int newScore;
     in >> newScore;
     field->setScore(newScore);
 
-    //заполняем игровое поле
+
     QVector<QString> stringsOfField;
     for(int i = 0; i < 9; i++)
     {
@@ -204,10 +227,9 @@ void MainWindow::loadGameFromFile()
     }
     field->setFieldFullness(stringsOfField);
 
-    //расставляем фигурки (концепция генерации)
+
     valueOfFiguresOnTheScene = 0;
     figures.clear();
-
     int numberOfType, rotation, posX;
 
     while(!in.atEnd())
@@ -215,6 +237,11 @@ void MainWindow::loadGameFromFile()
         in >> numberOfType >> rotation >> posX;
         generateFigureWithType(numberOfType, rotation, posX);
     }
+
+    file.close();
+
+    loadRecord();
+
 }
 
 void MainWindow::loadGameIntoFile()
@@ -226,8 +253,6 @@ void MainWindow::loadGameIntoFile()
 
     file.resize(0);
     QTextStream out(&file);
-
-    updateRecord();
 
     out << field->getScore() << '\n';
 
@@ -311,17 +336,21 @@ void MainWindow::oneOfFiguresWasPlaced()
         }
     }
 
+
     if(valueOfFiguresOnTheScene == countOfFiguresCannotBePlaced)
     {
-        QMessageBox* message = new QMessageBox(QMessageBox::Information, "lol", "hello");
-        //QTimer::singleShot(10, [=](){QMessageBox::information(this, "title", "you lose!");});
-        message->exec();
-
+        updateRecord();
         QFile save("../../files/save.txt");
         save.resize(0);
         save.close();
 
-        QTimer::singleShot(1000, [=](){emit exit();});
+        DialogAboutLoss* dialog = new DialogAboutLoss();
+
+        connect(dialog, &DialogAboutLoss::accepted, [=](){
+            emit exit();
+        });
+
+        QTimer::singleShot(100, [=](){dialog->exec();});
     }
     else loadGameIntoFile();
 }

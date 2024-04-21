@@ -4,6 +4,7 @@ GameField::GameField(qreal qUnit)
 {
     this->qUnit = qUnit;
     score = 0;
+    record = 0;
 
     deletingPlayer = new QMediaPlayer();
     output = new QAudioOutput();
@@ -270,7 +271,9 @@ void GameField::deleteAllStrikes()
                     }
                 });
 
-                score++;
+                setScore(++score);
+
+                if(score > record) setRecord(score);
 
                 arrayOfFieldFullness[i][j] = '.';
                 resetShadowsAndLight();
@@ -281,7 +284,6 @@ void GameField::deleteAllStrikes()
     deleting->start(20);
     deletingPlayer->play();
 
-    emit scoreChanged();
 }
 
 void GameField::lightAllPotentialStrikes()
@@ -335,6 +337,18 @@ int GameField::getScore()
 void GameField::setScore(int score)
 {
     this->score = score;
+    emit scoreChanged();
+}
+
+int GameField::getRecord()
+{
+    return record;
+}
+
+void GameField::setRecord(int record)
+{
+    this->record = record;
+    emit recordChanged();
 }
 
 QVector<QString> GameField::getArrayOfFieldFullness()
@@ -425,11 +439,6 @@ bool GameField::isAboveAnFigure()
         for(int j = 0; j < 9; j++)
         {
             if(arrayOfFieldFullness[i][j] == 's') return true;
-
-            // if(arrayOfBackgroundSquares[i][j]->brush().color() == "#97C4FF" || arrayOfBackgroundSquares[i][j]->brush().color() == "#B7D7FF")
-            // {
-            //     return true;
-            // }
         }
     }
 
@@ -457,6 +466,10 @@ void GameField::fillCellsByNewFigure()
 
                 addToGroup(arrayOfSetCells[i][j]);
                 arrayOfSetCells[i][j]->setZValue(0);
+
+                //начисление очков
+                setScore(++score);
+                if(score > record) setRecord(score);
             }
         }
     }
