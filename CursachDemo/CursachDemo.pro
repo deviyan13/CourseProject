@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     bigltypefigure.cpp \
     dialogaboutgame.cpp \
+    dialogchoosinggamestart.cpp \
     figureitem.cpp \
     gamefield.cpp \
     inverseltypefigure.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     bigltypefigure.h \
     dialogaboutgame.h \
+    dialogchoosinggamestart.h \
     figureitem.h \
     gamefield.h \
     inverseltypefigure.h \
@@ -45,6 +47,7 @@ HEADERS += \
 
 FORMS += \
     dialogaboutgame.ui \
+    dialogchoosinggamestart.ui \
     mainmenu.ui \
     mainwindow.ui
 

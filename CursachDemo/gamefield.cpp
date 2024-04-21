@@ -51,6 +51,24 @@ void GameField::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(widget);
 }
 
+void GameField::clear()
+{
+    resetShadowsAndLight();
+
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(arrayOfSetCells[i][j] != nullptr)
+            {
+                delete arrayOfSetCells[i][j];
+                arrayOfSetCells[i][j] = nullptr;
+            }
+            arrayOfFieldFullness[i][j] = '.';
+        }
+    }
+}
+
 void GameField::setShadowForSquare(int j, int i)
 {
     if(((i == 3 || i == 4 || i == 5) && (j == 0 || j == 1 || j == 2)) ||
@@ -314,6 +332,60 @@ int GameField::getScore()
     return score;
 }
 
+void GameField::setScore(int score)
+{
+    this->score = score;
+}
+
+QVector<QString> GameField::getArrayOfFieldFullness()
+{
+    QVector<QString> stringsOfArray;
+    for(int i = 0; i < 9; i++)
+    {
+        QString stringOfArray = "";
+
+        for(int j = 0; j < 9; j++)
+        {
+            stringOfArray += arrayOfFieldFullness[i][j];
+        }
+
+        stringsOfArray.push_back(stringOfArray);
+    }
+
+    return stringsOfArray;
+}
+
+void GameField::setFieldFullness(QVector<QString> stringsOfField)
+{
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            arrayOfFieldFullness[i][j] = stringsOfField[i][j];
+
+            if(arrayOfSetCells[i][j] != nullptr)
+            {
+                delete arrayOfSetCells[i][j];
+                arrayOfSetCells[i][j] = nullptr;
+            }
+
+            if(stringsOfField[i][j] == '1')
+            {
+                arrayOfSetCells[i][j] = new QGraphicsRectItem(0, 0, qUnit, qUnit);
+                arrayOfSetCells[i][j]->setPos(2 * qUnit + j * qUnit, qUnit + i * qUnit);
+
+                arrayOfSetCells[i][j]->setTransformOriginPoint(qUnit / 2.0, qUnit / 2.0);
+                arrayOfSetCells[i][j]->setBrush(QColor("#4395FF"));
+                arrayOfSetCells[i][j]->setPen(QPen(QColor("#0E77FF"), 3));
+
+                addToGroup(arrayOfSetCells[i][j]);
+                arrayOfSetCells[i][j]->setZValue(0);
+
+                resetShadowsAndLight();
+            }
+        }
+    }
+}
 
 
 void GameField::markPotentialStrikedRow(int row)

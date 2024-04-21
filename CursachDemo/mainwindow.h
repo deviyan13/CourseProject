@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QFile>
+#include <QTextStream>
 
 #include "gamefield.h"
 #include "ltypefigure.h"
@@ -13,6 +15,7 @@
 #include "stypefigure.h"
 #include "inversestypefigure.h"
 #include "stick4typefigure.h"
+#include "bigltypefigure.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,7 +31,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void clearGame();
+    void updateRecord();
+
+    void startNewGame();
     void generateThreeFigures();
+    void generateFigureWithType(int numberOfType, int rotation, int posX);
+
+    void loadGameFromFile();
+    void loadGameIntoFile();
 
 private:
     Ui::MainWindow *ui;
@@ -48,6 +59,6 @@ signals:
     void exit();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_exitButton_clicked();
 };
 #endif // MAINWINDOW_H

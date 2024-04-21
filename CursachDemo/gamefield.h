@@ -20,9 +20,10 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-
+    void clear();
 
     void resetShadowsAndLight();
+
 
     void setShadowForSquare(int j, int i);
     void setShadowForFigure(QVector<std::pair<int, int>> coordinatesOfSquares, int x, int y);
@@ -52,11 +53,17 @@ public:
     void markStrikedColumn(int column);
     void markStrikedSquareWithVertices(int x, int y);
 
+
+    //for saving
     int getScore();
+    void setScore(int score);
+
+    QVector <QString> getArrayOfFieldFullness();
+    void setFieldFullness(QVector<QString> stringsOfField);
 
 
 private:
-    char arrayOfFieldFullness[9][9];
+    QChar arrayOfFieldFullness[9][9];
     QGraphicsRectItem* arrayOfBackgroundSquares[9][9], *arrayOfSetCells[9][9];
 
     qreal qUnit;

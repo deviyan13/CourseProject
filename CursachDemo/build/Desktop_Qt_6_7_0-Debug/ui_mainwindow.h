@@ -27,7 +27,7 @@ public:
     QGraphicsView *graphicsView;
     QLabel *score;
     QLabel *labelScore;
-    QPushButton *pushButton;
+    QPushButton *exitButton;
     QMenuBar *menubar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -58,13 +58,13 @@ public:
         font1.setPointSize(15);
         labelScore->setFont(font1);
         labelScore->setAlignment(Qt::AlignCenter);
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(1260, 840, 311, 81));
+        exitButton = new QPushButton(centralwidget);
+        exitButton->setObjectName("exitButton");
+        exitButton->setGeometry(QRect(1260, 840, 311, 81));
         QFont font2;
         font2.setFamilies({QString::fromUtf8("NotoSerifTamilSlanted Medium")});
         font2.setPointSize(28);
-        pushButton->setFont(font2);
+        exitButton->setFont(font2);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -81,7 +81,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
         score->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelScore->setText(QCoreApplication::translate("MainWindow", "SCORE", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264 \320\262 \320\274\320\265\320\275\321\216", nullptr));
+        exitButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264 \320\262 \320\274\320\265\320\275\321\216", nullptr));
     } // retranslateUi
 
 };

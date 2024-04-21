@@ -1,3 +1,4 @@
+#include "dialogchoosinggamestart.h"
 #include "mainmenu.h"
 #include "mainwindow.h"
 
@@ -9,6 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     MainMenu menu;
+    DialogChoosingGameStart chooseOfGameStart;
 
 
     QScreen *screen =QGuiApplication::primaryScreen();
@@ -18,17 +20,45 @@ int main(int argc, char *argv[])
 
     w.resize(width1 / 2.0 ,height1 / 2.0);
     menu.resize(width1 / 2.0 ,height1 / 2.0);
+    chooseOfGameStart.resize(width1 / 2.0 ,height1 / 2.0);
+
     menu.show();
 
-    QObject::connect(&menu, &MainMenu::play, [&w, &menu](){
-        w.showNormal();
-        menu.hide();
+    QObject::connect(&menu, &MainMenu::play, [&w, &menu, &chooseOfGameStart](){
+        //w.showNormal();
+        QFile file("../../files/save.txt");
+        if (file.size() != 0)
+        {
+            chooseOfGameStart.showNormal();
+            QObject::connect(&chooseOfGameStart, &DialogChoosingGameStart::continueGame, [&w, &chooseOfGameStart](){
 
+                w.loadGameFromFile();
+                w.showNormal();
+
+                QTimer::singleShot(500, &chooseOfGameStart, &DialogChoosingGameStart::hide);
+
+            });
+
+            QObject::connect(&chooseOfGameStart, &DialogChoosingGameStart::restartGame, [&w, &chooseOfGameStart](){
+                w.startNewGame();
+                w.showNormal();
+
+                QTimer::singleShot(500, &chooseOfGameStart, &DialogChoosingGameStart::hide);
+            });
+        }
+        else
+        {
+            w.startNewGame();
+            w.showNormal();
+        }
+        file.close();
+
+        QTimer::singleShot(500, &menu, &MainMenu::hide);
     });
 
     QObject::connect(&w, &MainWindow::exit, [&w, &menu](){
         menu.showNormal();
-        w.hide();
+        QTimer::singleShot(500, &w, &MainWindow::hide);
 
     });
 
