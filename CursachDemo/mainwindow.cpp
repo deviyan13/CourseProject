@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     valueOfFiguresOnTheScene = 0;
 
+    generator = new BacktrackingGenerator(field);
+    connect(generator, &BacktrackingGenerator::placedFigureToWindow, this, &MainWindow::oneOfFiguresWasPlaced);
+
 
 
     connect(field, &GameField::scoreChanged, [=](){
@@ -139,73 +142,12 @@ void MainWindow::startNewGame()
     clearGame();
     field->setScore(0);
 
-    valueOfFiguresOnTheScene = 0;
-    generateThreeFigures();
+    valueOfFiguresOnTheScene = 3;
+    generator->run(field, figures);
+
     loadRecord();
 }
 
-void MainWindow::generateThreeFigures()
-{
-    figures.clear();
-    valueOfFiguresOnTheScene = 0;
-
-    for(int i = 0; i < 3; i++)
-    {
-        int numberOfType = rand() % 9;
-        generateFigureWithType(numberOfType, ((rand() % 4) * 90), 1 * qUnit + i * 4 * qUnit);
-    }
-}
-
-void MainWindow::generateFigureWithType(int numberOfType, int rotation, int posX)
-{
-    valueOfFiguresOnTheScene++;
-
-    if(numberOfType == 0)
-    {
-        figures.push_back(new LtypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 1)
-    {
-        figures.push_back(new TtypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 2)
-    {
-        figures.push_back(new Square2TypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 3)
-    {
-        figures.push_back(new MiniLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 4)
-    {
-        figures.push_back(new InverseLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 5)
-    {
-        figures.push_back(new STypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 6)
-    {
-        figures.push_back(new InverseSTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 7)
-    {
-        figures.push_back(new Stick4TypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-    else if(numberOfType == 8)
-    {
-        figures.push_back(new BigLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
-    }
-
-    scene->addItem(figures.back());
-    connect(figures.back(), &FigureItem::isPlaced, this, &MainWindow::oneOfFiguresWasPlaced);
-
-    figures.back()->setRotation(rotation);
-    figures.back()->UpdateCoordinatesOfSquares();
-
-    qDebug() << "added" << numberOfType << rotation << posX;
-
-}
 
 void MainWindow::loadGameFromFile()
 {
@@ -238,10 +180,13 @@ void MainWindow::loadGameFromFile()
     figures.clear();
     int numberOfType, rotation, posX;
 
+    valueOfFiguresOnTheScene = 0;
+
     while(!in.atEnd())
     {
         in >> numberOfType >> rotation >> posX;
-        generateFigureWithType(numberOfType, rotation, posX);
+        generateFigureWithType(field, numberOfType, rotation, posX);
+        valueOfFiguresOnTheScene++;
     }
 
     file.close();
@@ -316,6 +261,54 @@ void MainWindow::loadGameIntoFile()
     file.close();
 }
 
+void MainWindow::generateFigureWithType(GameField *field, int numberOfType, int rotation, int posX)
+{
+    if(numberOfType == 0)
+    {
+        figures.push_back(new LtypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 1)
+    {
+        figures.push_back(new TtypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 2)
+    {
+        figures.push_back(new Square2TypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 3)
+    {
+        figures.push_back(new MiniLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 4)
+    {
+        figures.push_back(new InverseLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 5)
+    {
+        figures.push_back(new STypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 6)
+    {
+        figures.push_back(new InverseSTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 7)
+    {
+        figures.push_back(new Stick4TypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 8)
+    {
+        figures.push_back(new BigLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+
+    field->scene()->addItem(figures.back());
+    connect(figures.back(), &FigureItem::isPlaced, this, &MainWindow::oneOfFiguresWasPlaced);
+
+    figures.back()->setRotation(rotation);
+    figures.back()->UpdateCoordinatesOfSquares();
+
+    qDebug() << "added" << numberOfType << rotation << posX;
+}
+
 void MainWindow::oneOfFiguresWasPlaced()
 {
     int countOfFiguresCannotBePlaced = 0;
@@ -323,7 +316,8 @@ void MainWindow::oneOfFiguresWasPlaced()
 
     if(valueOfFiguresOnTheScene == 0)
     {
-        generateThreeFigures();
+        generator->run(field, figures);
+        valueOfFiguresOnTheScene = 3;
     }
 
     for(int i = 0; i < figures.size(); i++)

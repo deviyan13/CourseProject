@@ -49,7 +49,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::myShow()
 {
-    QTimer::singleShot(0, this, SLOT(showFullScreen()));
+    QTimer::singleShot(10, this, SLOT(showMaximized()));
 }
 
 void MainMenu::on_playButton_clicked()

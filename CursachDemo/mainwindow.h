@@ -17,6 +17,8 @@
 #include "stick4typefigure.h"
 #include "bigltypefigure.h"
 
+#include "backtrackinggenerator.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -36,11 +38,11 @@ public:
     void loadRecord();
 
     void startNewGame();
-    void generateThreeFigures();
-    void generateFigureWithType(int numberOfType, int rotation, int posX);
 
     void loadGameFromFile();
     void loadGameIntoFile();
+
+    void generateFigureWithType(GameField* field, int numberOfType, int rotation, int posX);
 
 private:
     Ui::MainWindow *ui;
@@ -52,14 +54,15 @@ private:
 
     qreal qUnit;
 
-public slots:
-
-    void oneOfFiguresWasPlaced();
+    BacktrackingGenerator* generator;
 
 signals:
     void exit();
 
 private slots:
     void on_exitButton_clicked();
+
+public slots:
+    void oneOfFiguresWasPlaced();
 };
 #endif // MAINWINDOW_H

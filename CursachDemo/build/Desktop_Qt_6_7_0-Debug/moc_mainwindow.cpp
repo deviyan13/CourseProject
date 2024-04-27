@@ -38,8 +38,8 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "MainWindow",
     "exit",
     "",
-    "oneOfFiguresWasPlaced",
-    "on_exitButton_clicked"
+    "on_exitButton_clicked",
+    "oneOfFiguresWasPlaced"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -63,8 +63,8 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        1,    0,   32,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,   33,    2, 0x0a,    2 /* Public */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+       3,    0,   33,    2, 0x08,    2 /* Private */,
+       4,    0,   34,    2, 0x0a,    3 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -87,9 +87,9 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
         // method 'exit'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'oneOfFiguresWasPlaced'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_exitButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'oneOfFiguresWasPlaced'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -102,8 +102,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->exit(); break;
-        case 1: _t->oneOfFiguresWasPlaced(); break;
-        case 2: _t->on_exitButton_clicked(); break;
+        case 1: _t->on_exitButton_clicked(); break;
+        case 2: _t->oneOfFiguresWasPlaced(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

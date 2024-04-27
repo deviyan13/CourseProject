@@ -121,7 +121,8 @@ void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             setLive(false);
             emit isPlaced();
             this->hide();
-            scene()->removeItem(this);
+
+            if(scene() != nullptr) scene()->removeItem(this);
         }
         else
         {
@@ -199,6 +200,28 @@ bool FigureItem::isCanBePlaced()
     return false;
 }
 
+bool FigureItem::isCanBePlacedOn(int x, int y)
+{
+    qUnit = scene()->height() / 15;
+    QRectF shapeBoundingRect = mapToScene(shape().boundingRect()).boundingRect();
+
+    if(y < 9 - shapeBoundingRect.height() / qUnit && x < 9 - shapeBoundingRect.width() / qUnit)
+    {
+        if(!getField()->AreCellsFilled(leftTopPointsOfSquares, x, y))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void FigureItem::placeOn(int x, int y)
+{
+    getField()->setShadowForFigure(leftTopPointsOfSquares, x, y);
+    getField()->fillCellsByNewFigure();
+}
+
 void FigureItem::setLive(bool live)
 {
     isLive = live;
@@ -207,6 +230,11 @@ void FigureItem::setLive(bool live)
 bool FigureItem::getIsLive()
 {
     return isLive;
+}
+
+QVector<std::pair<int, int> > FigureItem::getLeftTopPointsOfSquares()
+{
+    return leftTopPointsOfSquares;
 }
 
 GameField *FigureItem::getField()

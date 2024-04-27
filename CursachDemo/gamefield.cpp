@@ -5,6 +5,7 @@ GameField::GameField(qreal qUnit)
     this->qUnit = qUnit;
     score = 0;
     record = 0;
+    combo = 0;
 
     deletingPlayer = new QMediaPlayer();
     output = new QAudioOutput();
@@ -36,6 +37,34 @@ GameField::GameField(qreal qUnit)
         {
             arrayOfFieldFullness[i][j] = '.';
             arrayOfSetCells[i][j] = nullptr;
+        }
+    }
+}
+
+GameField::GameField(const GameField &other)
+{
+    this->qUnit = other.qUnit;
+    score = 0;
+    record = 0;
+
+    deletingPlayer = other.deletingPlayer;
+    output = other.output;
+
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            arrayOfBackgroundSquares[i][j] = other.arrayOfBackgroundSquares[i][j];
+            this->addToGroup(arrayOfBackgroundSquares[i][j]);
+        }
+    }
+
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            arrayOfFieldFullness[i][j] = other.arrayOfFieldFullness[i][j];
+            arrayOfSetCells[i][j] = other.arrayOfSetCells[i][j];
         }
     }
 }
@@ -178,7 +207,15 @@ void GameField::searchMarkAndDeleteAllStrikes()
         }
     }
 
-    if(areStrikesFound) deleteAllStrikes();
+    if(areStrikesFound)
+    {
+        combo++;
+        deleteAllStrikes();
+    }
+    else
+    {
+        combo = 0;
+    }
 }
 
 bool GameField::isStrikeInTheRow(int row)
@@ -271,7 +308,11 @@ void GameField::deleteAllStrikes()
                     }
                 });
 
-                setScore(++score);
+                score += combo * 1;
+
+                qDebug() << score << "deleted one sqaure";
+
+                setScore(score);
 
                 if(score > record) setRecord(score);
 
@@ -470,6 +511,8 @@ void GameField::fillCellsByNewFigure()
                 //начисление очков
                 setScore(++score);
                 if(score > record) setRecord(score);
+
+                qDebug() << score << "placed one square";
             }
         }
     }

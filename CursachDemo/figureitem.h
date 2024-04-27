@@ -32,8 +32,12 @@ public:
     virtual void UpdateCoordinatesOfSquares();
 
     bool isCanBePlaced();
+    bool isCanBePlacedOn(int x, int y);
+    void placeOn(int x, int y);
+
     void setLive(bool live);
     bool getIsLive();
+    QVector <std::pair<int, int>> getLeftTopPointsOfSquares();
 
     GameField *getField();
 

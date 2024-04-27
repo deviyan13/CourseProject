@@ -17,6 +17,8 @@ class GameField : public QObject, public QGraphicsItemGroup
 
 public:
     GameField(qreal qUnit);
+    GameField(const GameField &other);
+
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
@@ -74,6 +76,7 @@ private:
     QAudioOutput* output;
 
     int score, record;
+    int combo;
 
 signals:
     void scoreChanged();
