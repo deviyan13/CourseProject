@@ -6,10 +6,12 @@
 #include <QGraphicsItem>
 #include <QGraphicsRectItem>
 #include <QTimer>
-#include "typesoffigures.h"
+#include "figures/typesoffigures.h"
 #include <QEventLoop>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QGraphicsDropShadowEffect>
+
 
 class GameField : public QObject, public QGraphicsItemGroup
 {
@@ -61,6 +63,7 @@ public:
     void setScore(int score);
     int getRecord();
     void setRecord(int record);
+    void showTextVisual(QString text);
 
     QVector <QString> getArrayOfFieldFullness();
     void setFieldFullness(QVector<QString> stringsOfField);

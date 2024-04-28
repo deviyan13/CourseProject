@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../square2typefigure.h"
+#include "../../figures/square2typefigure.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

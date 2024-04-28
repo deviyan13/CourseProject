@@ -125,7 +125,7 @@ void FigureItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             if(scene() != nullptr) scene()->removeItem(this);
         }
         else
-        {
+        {   
             setPos(startPlacePos);
         }
     }
@@ -137,6 +137,9 @@ void FigureItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
+        relasePlayer->setSource(QUrl::fromLocalFile("../../media/rotate.mp3"));
+        relasePlayer->play();
+
         setRotation((rotation() + 90));
         if(rotation() >= 360) setRotation(rotation() - 360);
 

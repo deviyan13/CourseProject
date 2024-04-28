@@ -1,5 +1,5 @@
 #include "mainmenu.h"
-#include "dialogaboutgame.h"
+#include "dialogs/dialogaboutgame.h"
 #include "qtimer.h"
 #include "ui_mainmenu.h"
 

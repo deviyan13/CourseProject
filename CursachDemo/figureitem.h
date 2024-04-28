@@ -9,7 +9,7 @@
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
-#include "typesoffigures.h"
+#include "figures/typesoffigures.h"
 #include <QAudioOutput>
 #include <QFileDialog>
 #include <QObject>

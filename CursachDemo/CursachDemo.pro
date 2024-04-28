@@ -9,50 +9,50 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    figures/bigltypefigure.cpp \
+    figures/inverseltypefigure.cpp \
+    figures/inversestypefigure.cpp \
+    figures/ltypefigure.cpp \
+    figures/miniltypefigure.cpp \
+    figures/square2typefigure.cpp \
+    figures/stick4typefigure.cpp \
+    figures/stypefigure.cpp \
+    figures/ttypefigure.cpp \
+    figures/typesoffigures.cpp \
     backtrackinggenerator.cpp \
-    bigltypefigure.cpp \
-    dialogaboutgame.cpp \
-    dialogaboutloss.cpp \
-    dialogchoosinggamestart.cpp \
+    dialogs/dialogaboutgame.cpp \
+    dialogs/dialogaboutloss.cpp \
+    dialogs/dialogchoosinggamestart.cpp \
     figureitem.cpp \
     gamefield.cpp \
-    inverseltypefigure.cpp \
-    inversestypefigure.cpp \
-    ltypefigure.cpp \
     main.cpp \
     mainmenu.cpp \
-    mainwindow.cpp \
-    miniltypefigure.cpp \
-    square2typefigure.cpp \
-    stick4typefigure.cpp \
-    stypefigure.cpp \
-    ttypefigure.cpp \
-    typesoffigures.cpp
+    mainwindow.cpp
 
 HEADERS += \
+    figures/bigltypefigure.h \
+    figures/inverseltypefigure.h \
+    figures/inversestypefigure.h \
+    figures/ltypefigure.h \
+    figures/miniltypefigure.h \
+    figures/square2typefigure.h \
+    figures/stick4typefigure.h \
+    figures/stypefigure.h \
+    figures/ttypefigure.h \
+    figures/typesoffigures.h \
     backtrackinggenerator.h \
-    bigltypefigure.h \
-    dialogaboutgame.h \
-    dialogaboutloss.h \
-    dialogchoosinggamestart.h \
+    dialogs/dialogaboutgame.h \
+    dialogs/dialogaboutloss.h \
+    dialogs/dialogchoosinggamestart.h \
     figureitem.h \
     gamefield.h \
-    inverseltypefigure.h \
-    inversestypefigure.h \
-    ltypefigure.h \
     mainmenu.h \
-    mainwindow.h \
-    miniltypefigure.h \
-    square2typefigure.h \
-    stick4typefigure.h \
-    stypefigure.h \
-    ttypefigure.h \
-    typesoffigures.h
+    mainwindow.h
 
 FORMS += \
-    dialogaboutgame.ui \
-    dialogaboutloss.ui \
-    dialogchoosinggamestart.ui \
+    dialogs/dialogaboutgame.ui \
+    dialogs/dialogaboutloss.ui \
+    dialogs/dialogchoosinggamestart.ui \
     mainmenu.ui \
     mainwindow.ui
 

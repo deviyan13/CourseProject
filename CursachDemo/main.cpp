@@ -1,4 +1,4 @@
-#include "dialogchoosinggamestart.h"
+#include "dialogs/dialogchoosinggamestart.h"
 #include "mainmenu.h"
 #include "mainwindow.h"
 
@@ -12,6 +12,13 @@ int main(int argc, char *argv[])
     MainMenu menu;
     DialogChoosingGameStart chooseOfGameStart;
 
+    QMediaPlayer *player = new QMediaPlayer();
+    QAudioOutput *output = new QAudioOutput();
+
+
+    player->setAudioOutput(output);
+    output->setVolume(0.5);
+
 
     QScreen *screen =QGuiApplication::primaryScreen();
     QRect screenGeometry = screen->geometry();
@@ -24,13 +31,15 @@ int main(int argc, char *argv[])
 
     menu.show();
 
-    QObject::connect(&menu, &MainMenu::play, [&w, &menu, &chooseOfGameStart](){
-        //w.showNormal();
+    QObject::connect(&menu, &MainMenu::play, [&w, &menu, &chooseOfGameStart, &player](){
+
         QFile file("../../files/save.txt");
         if (file.size() != 0)
         {
             chooseOfGameStart.showNormal();
-            QObject::connect(&chooseOfGameStart, &DialogChoosingGameStart::continueGame, [&w, &chooseOfGameStart](){
+            QObject::connect(&chooseOfGameStart, &DialogChoosingGameStart::continueGame, [&player, &w, &chooseOfGameStart](){
+                player->setSource(QUrl::fromLocalFile("../../media/continueGame.mp3"));
+                player->play();
 
                 w.loadGameFromFile();
                 w.showNormal();
@@ -39,7 +48,10 @@ int main(int argc, char *argv[])
 
             });
 
-            QObject::connect(&chooseOfGameStart, &DialogChoosingGameStart::restartGame, [&w, &chooseOfGameStart](){
+            QObject::connect(&chooseOfGameStart, &DialogChoosingGameStart::restartGame, [&player, &w, &chooseOfGameStart](){
+                player->setSource(QUrl::fromLocalFile("../../media/newGame.mp3"));
+                player->play();
+
                 w.startNewGame();
                 w.showNormal();
 

@@ -28,19 +28,19 @@ public:
     {
         if (DialogAboutLoss->objectName().isEmpty())
             DialogAboutLoss->setObjectName("DialogAboutLoss");
-        DialogAboutLoss->resize(400, 300);
+        DialogAboutLoss->resize(1025, 681);
         buttonBox = new QDialogButtonBox(DialogAboutLoss);
         buttonBox->setObjectName("buttonBox");
-        buttonBox->setGeometry(QRect(20, 250, 341, 32));
+        buttonBox->setGeometry(QRect(350, 560, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Ok);
         buttonBox->setCenterButtons(true);
         label = new QLabel(DialogAboutLoss);
         label->setObjectName("label");
-        label->setGeometry(QRect(40, 80, 321, 101));
+        label->setGeometry(QRect(150, 140, 761, 321));
         QFont font;
         font.setFamilies({QString::fromUtf8("Noto Serif Yezidi")});
-        font.setPointSize(29);
+        font.setPointSize(70);
         font.setBold(true);
         label->setFont(font);
         label->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);"));

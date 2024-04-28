@@ -65,7 +65,7 @@ public:
 
     void retranslateUi(QMainWindow *DialogChoosingGameStart)
     {
-        DialogChoosingGameStart->setWindowTitle(QCoreApplication::translate("DialogChoosingGameStart", "MainWindow", nullptr));
+        DialogChoosingGameStart->setWindowTitle(QCoreApplication::translate("DialogChoosingGameStart", "Choise", nullptr));
         continueButton->setText(QCoreApplication::translate("DialogChoosingGameStart", "\320\237\321\200\320\276\320\264\320\276\320\273\320\266\320\270\321\202\321\214 \320\270\320\263\321\200\321\203", nullptr));
         newGameButton->setText(QCoreApplication::translate("DialogChoosingGameStart", "\320\235\320\276\320\262\320\260\321\217 \320\270\320\263\321\200\320\260", nullptr));
     } // retranslateUi

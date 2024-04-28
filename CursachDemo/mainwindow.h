@@ -7,15 +7,15 @@
 #include <QTextStream>
 
 #include "gamefield.h"
-#include "ltypefigure.h"
-#include "ttypefigure.h"
-#include "square2typefigure.h"
-#include "miniltypefigure.h"
-#include "inverseltypefigure.h"
-#include "stypefigure.h"
-#include "inversestypefigure.h"
-#include "stick4typefigure.h"
-#include "bigltypefigure.h"
+#include "figures/ltypefigure.h"
+#include "figures/ttypefigure.h"
+#include "figures/square2typefigure.h"
+#include "figures/miniltypefigure.h"
+#include "figures/inverseltypefigure.h"
+#include "figures/stypefigure.h"
+#include "figures/inversestypefigure.h"
+#include "figures/stick4typefigure.h"
+#include "figures/bigltypefigure.h"
 
 #include "backtrackinggenerator.h"
 

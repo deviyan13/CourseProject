@@ -1,13 +1,13 @@
 #include "backtrackinggenerator.h"
-#include "bigltypefigure.h"
-#include "inverseltypefigure.h"
-#include "inversestypefigure.h"
-#include "ltypefigure.h"
-#include "miniltypefigure.h"
-#include "square2typefigure.h"
-#include "stick4typefigure.h"
-#include "stypefigure.h"
-#include "ttypefigure.h"
+#include "figures/bigltypefigure.h"
+#include "figures/inverseltypefigure.h"
+#include "figures/inversestypefigure.h"
+#include "figures/ltypefigure.h"
+#include "figures/miniltypefigure.h"
+#include "figures/square2typefigure.h"
+#include "figures/stick4typefigure.h"
+#include "figures/stypefigure.h"
+#include "figures/ttypefigure.h"
 
 BacktrackingGenerator::BacktrackingGenerator(GameField* field)
 {
@@ -25,7 +25,7 @@ void BacktrackingGenerator::run(GameField* field, QVector<FigureItem *> &figures
     {
         generateThreeFigures(field);
 
-        if(check(this->figures[0], fieldVector, 1))
+        if(isCanBeTripleFigures(this->figures[0], fieldVector, 1))
         {
             qDebug() << "ok";
             figures = this->figures;
@@ -102,9 +102,8 @@ void BacktrackingGenerator::generateFigureWithType(GameField *field, int numberO
 }
 
 
-bool BacktrackingGenerator::check(FigureItem *figure, QVector<QString> fieldFulness, int numberOfFigure)
+bool BacktrackingGenerator::isCanBeTripleFigures(FigureItem *figure, QVector<QString> fieldFulness, int numberOfFigure)
 {
-    if(numberOfFigure == 3) return true;
 
     for(int i = 0; i < 9; i++)
     {
@@ -118,8 +117,12 @@ bool BacktrackingGenerator::check(FigureItem *figure, QVector<QString> fieldFuln
 
                 if(CanFigureBePlacedOnFieldArray(figure, fieldFulness, j, i))
                 {
-                    markFigureOnFieldArray(figure, fieldFulness, j, i);
-                    if(check(figures[numberOfFigure], fieldFulness, numberOfFigure + 1)) return true;
+                    if(numberOfFigure == 3) return true;
+                    else
+                    {
+                        markFigureOnFieldArray(figure, fieldFulness, j, i);
+                        if(isCanBeTripleFigures(figures[numberOfFigure], fieldFulness, numberOfFigure + 1)) return true;
+                    }
                 }
             }
         }

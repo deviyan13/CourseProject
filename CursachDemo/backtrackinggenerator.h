@@ -27,7 +27,7 @@ public:
 
 
     void run(GameField* field, QVector <FigureItem*> &figures);
-    bool check(FigureItem *figure, QVector<QString> fieldFulness, int numberOfFigure);
+    bool isCanBeTripleFigures(FigureItem *figure, QVector<QString> fieldFulness, int numberOfFigure);
     bool CanFigureBePlacedOnFieldArray(FigureItem* figure, QVector<QString> fieldFulness, int x, int y);
     void markFigureOnFieldArray(FigureItem* figure, QVector<QString> &fieldFulness, int x, int y);
     void findAndDeleteStrikes(QVector<QString> &fieldFulness);

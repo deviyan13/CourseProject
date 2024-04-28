@@ -1,4 +1,5 @@
 #include "gamefield.h"
+#include "qlabel.h"
 
 GameField::GameField(qreal qUnit)
 {
@@ -210,6 +211,40 @@ void GameField::searchMarkAndDeleteAllStrikes()
     if(areStrikesFound)
     {
         combo++;
+
+        if(combo > 1) showTextVisual("COMBO x" + QString::number(combo) + "!");
+        else
+        {
+            int variant = rand() % 5;
+            switch(variant)
+            {
+                case 0:
+                {
+                    showTextVisual("WOW!");
+                    break;
+                }
+                case 1:
+                {
+                    showTextVisual("GREAT!");
+                    break;
+                }
+                case 2:
+                {
+                    showTextVisual("PERFECT!");
+                    break;
+                }
+                case 3:
+                {
+                    showTextVisual("NICE!");
+                    break;
+                }
+                case 4:
+                {
+                    showTextVisual("YOU'RE PRO!");
+                    break;
+                }
+            }
+        }
         deleteAllStrikes();
     }
     else
@@ -390,6 +425,44 @@ void GameField::setRecord(int record)
 {
     this->record = record;
     emit recordChanged();
+}
+
+void GameField::showTextVisual(QString text)
+{
+    QGraphicsTextItem *comboText = new QGraphicsTextItem;
+    comboText->setPlainText(text);
+    comboText->setFont(QFont("Noto", 100));
+    comboText->setDefaultTextColor(QColor("#FFEF00"));
+
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
+    shadowEffect->setBlurRadius(10);
+    shadowEffect->setColor(QColor("#DFA400"));
+    shadowEffect->setOffset(3, 3);
+    comboText->setGraphicsEffect(shadowEffect);
+
+    scene()->addItem(comboText);
+    comboText->setPos(6.5 * qUnit - comboText->boundingRect().width() / 2,
+                      5.5 * qUnit - comboText->boundingRect().height() / 2);
+    comboText->setTransformOriginPoint(comboText->boundingRect().width() / 2, comboText->boundingRect().height() / 2);
+
+    comboText->setScale(0.1);
+
+    QTimer *timer = new QTimer();
+    connect(timer, &QTimer::timeout, [comboText, timer, this](){
+        if(comboText->scale() < 1)
+        {
+            comboText->setScale(comboText->scale() + 0.012);
+        }
+        else
+        {
+            timer->stop();
+            scene()->removeItem(comboText);
+            delete comboText;
+            delete timer;
+        }
+
+    });
+    timer->start(60/1000.0);
 }
 
 QVector<QString> GameField::getArrayOfFieldFullness()
