@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     figures/bigltypefigure.cpp \
+    figures/diagonalstick2figure.cpp \
     figures/inverseltypefigure.cpp \
     figures/inversestypefigure.cpp \
     figures/ltypefigure.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
 
 HEADERS += \
     figures/bigltypefigure.h \
+    figures/diagonalstick2figure.h \
     figures/inverseltypefigure.h \
     figures/inversestypefigure.h \
     figures/ltypefigure.h \

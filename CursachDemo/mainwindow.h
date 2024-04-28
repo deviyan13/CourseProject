@@ -16,6 +16,7 @@
 #include "figures/inversestypefigure.h"
 #include "figures/stick4typefigure.h"
 #include "figures/bigltypefigure.h"
+#include "figures/diagonalstick2figure.h"
 
 #include "backtrackinggenerator.h"
 

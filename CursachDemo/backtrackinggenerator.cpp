@@ -1,5 +1,6 @@
 #include "backtrackinggenerator.h"
 #include "figures/bigltypefigure.h"
+#include "figures/diagonalstick2figure.h"
 #include "figures/inverseltypefigure.h"
 #include "figures/inversestypefigure.h"
 #include "figures/ltypefigure.h"
@@ -47,7 +48,7 @@ void BacktrackingGenerator::generateThreeFigures(GameField* field)
 
     for(int i = 0; i < 3; i++)
     {
-        int numberOfType = rand() % 9;
+        int numberOfType = rand() % 10;
         generateFigureWithType(field, numberOfType, ((rand() % 4) * 90), 1 * qUnit + i * 4 * qUnit);
     }
 }
@@ -90,6 +91,11 @@ void BacktrackingGenerator::generateFigureWithType(GameField *field, int numberO
     {
         figures.push_back(new BigLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
     }
+    else if(numberOfType == 9)
+    {
+        figures.push_back(new DiagonalStick2Figure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+
 
     field->scene()->addItem(figures.back());
     connect(figures.back(), &FigureItem::isPlaced, this, &BacktrackingGenerator::oneOfFiguresWasPlaced);

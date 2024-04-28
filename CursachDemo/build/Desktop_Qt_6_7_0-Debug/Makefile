@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../figures/bigltypefigure.cpp \
+		../../figures/diagonalstick2figure.cpp \
 		../../figures/inverseltypefigure.cpp \
 		../../figures/inversestypefigure.cpp \
 		../../figures/ltypefigure.cpp \
@@ -81,6 +82,7 @@ SOURCES       = ../../figures/bigltypefigure.cpp \
 		moc_mainmenu.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = bigltypefigure.o \
+		diagonalstick2figure.o \
 		inverseltypefigure.o \
 		inversestypefigure.o \
 		ltypefigure.o \
@@ -451,6 +453,7 @@ DIST          = /media/deviyan/NewPartForQT/6.7.0/gcc_64/mkspecs/features/spec_p
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/mkspecs/features/yacc.prf \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/mkspecs/features/lex.prf \
 		../../../../CursachDemo.pro ../../figures/bigltypefigure.h \
+		../../figures/diagonalstick2figure.h \
 		../../figures/inverseltypefigure.h \
 		../../figures/inversestypefigure.h \
 		../../figures/ltypefigure.h \
@@ -468,6 +471,7 @@ DIST          = /media/deviyan/NewPartForQT/6.7.0/gcc_64/mkspecs/features/spec_p
 		../../gamefield.h \
 		../../mainmenu.h \
 		../../mainwindow.h ../../figures/bigltypefigure.cpp \
+		../../figures/diagonalstick2figure.cpp \
 		../../figures/inverseltypefigure.cpp \
 		../../figures/inversestypefigure.cpp \
 		../../figures/ltypefigure.cpp \
@@ -1210,8 +1214,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /media/deviyan/NewPartForQT/6.7.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../figures/bigltypefigure.h ../../figures/inverseltypefigure.h ../../figures/inversestypefigure.h ../../figures/ltypefigure.h ../../figures/miniltypefigure.h ../../figures/square2typefigure.h ../../figures/stick4typefigure.h ../../figures/stypefigure.h ../../figures/ttypefigure.h ../../figures/typesoffigures.h ../../backtrackinggenerator.h ../../dialogs/dialogaboutgame.h ../../dialogs/dialogaboutloss.h ../../dialogs/dialogchoosinggamestart.h ../../figureitem.h ../../gamefield.h ../../mainmenu.h ../../mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../figures/bigltypefigure.cpp ../../figures/inverseltypefigure.cpp ../../figures/inversestypefigure.cpp ../../figures/ltypefigure.cpp ../../figures/miniltypefigure.cpp ../../figures/square2typefigure.cpp ../../figures/stick4typefigure.cpp ../../figures/stypefigure.cpp ../../figures/ttypefigure.cpp ../../figures/typesoffigures.cpp ../../backtrackinggenerator.cpp ../../dialogs/dialogaboutgame.cpp ../../dialogs/dialogaboutloss.cpp ../../dialogs/dialogchoosinggamestart.cpp ../../figureitem.cpp ../../gamefield.cpp ../../main.cpp ../../mainmenu.cpp ../../mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../figures/bigltypefigure.h ../../figures/diagonalstick2figure.h ../../figures/inverseltypefigure.h ../../figures/inversestypefigure.h ../../figures/ltypefigure.h ../../figures/miniltypefigure.h ../../figures/square2typefigure.h ../../figures/stick4typefigure.h ../../figures/stypefigure.h ../../figures/ttypefigure.h ../../figures/typesoffigures.h ../../backtrackinggenerator.h ../../dialogs/dialogaboutgame.h ../../dialogs/dialogaboutloss.h ../../dialogs/dialogchoosinggamestart.h ../../figureitem.h ../../gamefield.h ../../mainmenu.h ../../mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../figures/bigltypefigure.cpp ../../figures/diagonalstick2figure.cpp ../../figures/inverseltypefigure.cpp ../../figures/inversestypefigure.cpp ../../figures/ltypefigure.cpp ../../figures/miniltypefigure.cpp ../../figures/square2typefigure.cpp ../../figures/stick4typefigure.cpp ../../figures/stypefigure.cpp ../../figures/ttypefigure.cpp ../../figures/typesoffigures.cpp ../../backtrackinggenerator.cpp ../../dialogs/dialogaboutgame.cpp ../../dialogs/dialogaboutloss.cpp ../../dialogs/dialogchoosinggamestart.cpp ../../figureitem.cpp ../../gamefield.cpp ../../main.cpp ../../mainmenu.cpp ../../mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../dialogs/dialogaboutgame.ui ../../dialogs/dialogaboutloss.ui ../../dialogs/dialogchoosinggamestart.ui ../../mainmenu.ui ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -3213,6 +3217,7 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../figures/inversestypefigure.h \
 		../../figures/stick4typefigure.h \
 		../../figures/bigltypefigure.h \
+		../../figures/diagonalstick2figure.h \
 		../../backtrackinggenerator.h \
 		moc_predefs.h \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/libexec/moc
@@ -3490,6 +3495,242 @@ bigltypefigure.o: ../../figures/bigltypefigure.cpp ../../figures/bigltypefigure.
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtimezone.h \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bigltypefigure.o ../../figures/bigltypefigure.cpp
+
+diagonalstick2figure.o: ../../figures/diagonalstick2figure.cpp ../../figures/diagonalstick2figure.h \
+		../../figureitem.h \
+		../../gamefield.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QGraphicsView \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qgraphicsview.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qglobal.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qconfig.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtcore-config.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qassert.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtnoop.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtypes.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtversion.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qsysinfo.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qlogging.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qflags.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qatomic.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qforeach.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qttypetraits.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmalloc.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qminmax.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qnumeric.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qoverload.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qswap.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtresource.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qttranslation.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qversiontagging.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qtgui-config.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qtguiexports.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmetatype.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbytearray.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qrefcount.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qnamespace.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qarraydata.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qpair.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qarraydataops.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/q20functional.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/q20memory.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringfwd.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/q20type_traits.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcompare.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qdatastream.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qiodevicebase.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfloat16.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstring.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qchar.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringview.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringliteral.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qanystringview.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringconverter.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmath.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qalgorithms.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qiterable.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmetacontainer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qscopeguard.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpainter.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qrect.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmargins.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/q23utility.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qsize.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qpoint.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpixmap.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qcolor.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qrgb.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringlist.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qlist.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qiterator.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qrgba64.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qshareddata.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qimage.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpixelformat.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qtransform.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpolygon.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qregion.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qline.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qtextoption.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpen.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qbrush.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qfontinfo.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qfont.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qendian.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qscrollarea.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qframe.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qwidget.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qobject.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcoreevent.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qobject_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbindingstorage.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qaction.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qkeysequence.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qicon.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qvariant.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qdebug.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtextstream.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmap.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qset.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qhash.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpalette.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qcursor.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qbitmap.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qevent.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qiodevice.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qurl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qeventpoint.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qvector2d.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qvectornd.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpointingdevice.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qinputdevice.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qscreen.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QList \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QObject \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QRect \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QSize \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QSizeF \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/QTransform \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qnativeinterface.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qscreen_platform.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qguiapplication.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qeventloop.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfuture.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmutex.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtsan_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qresultstore.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfuture_impl.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qthreadpool.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qthread.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qrunnable.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qexception.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qpromise.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qinputmethod.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qlocale.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QGraphicsScene \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QGraphicsItem \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/qpainterpath.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QGraphicsRectItem \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QTimer \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtimer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qbasictimer.h \
+		../../figures/typesoffigures.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/QEventLoop \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qmetaobject.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/QAudioOutput \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtMultimedia/qaudiooutput.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QGraphicsDropShadowEffect \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qgraphicseffect.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/QPainter \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/QPainterPath \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QGraphicsSceneMouseEvent \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qgraphicssceneevent.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtGui/QCursor \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QFileDialog \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qfiledialog.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qdir.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfile.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfiledevice.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qfileinfo.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qdatetime.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qcalendar.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtimezone.h \
+		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qdialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o diagonalstick2figure.o ../../figures/diagonalstick2figure.cpp
 
 inverseltypefigure.o: ../../figures/inverseltypefigure.cpp ../../figures/inverseltypefigure.h \
 		../../figureitem.h \
@@ -5617,6 +5858,7 @@ backtrackinggenerator.o: ../../backtrackinggenerator.cpp ../../backtrackinggener
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtCore/qtimezone.h \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qdialog.h \
 		../../figures/bigltypefigure.h \
+		../../figures/diagonalstick2figure.h \
 		../../figures/inverseltypefigure.h \
 		../../figures/inversestypefigure.h \
 		../../figures/ltypefigure.h \
@@ -6944,6 +7186,7 @@ main.o: ../../main.cpp ../../dialogs/dialogchoosinggamestart.h \
 		../../figures/inversestypefigure.h \
 		../../figures/stick4typefigure.h \
 		../../figures/bigltypefigure.h \
+		../../figures/diagonalstick2figure.h \
 		../../backtrackinggenerator.h \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QApplication \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/qapplication.h \
@@ -7412,6 +7655,7 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../figures/inversestypefigure.h \
 		../../figures/stick4typefigure.h \
 		../../figures/bigltypefigure.h \
+		../../figures/diagonalstick2figure.h \
 		../../backtrackinggenerator.h \
 		../../dialogs/dialogaboutloss.h \
 		/media/deviyan/NewPartForQT/6.7.0/gcc_64/include/QtWidgets/QDialog \

@@ -86,7 +86,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -195,8 +194,26 @@ void MainWindow::loadGameFromFile()
 
 }
 
+
+class PCG32 {
+public:
+    static uint32_t next() {
+        state_ = state_ * 6364136223846793005ULL + 1442695040888963407ULL;
+        uint32_t xorshifted = ((state_ >> 18u) ^ state_) >> 27u;
+        uint32_t rot = state_ >> 59u;
+        return (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
+    }
+
+private:
+    static uint64_t state_;
+};
+
+uint64_t PCG32::state_ = 0x853c49e6748fea9bULL;
+
+
 void MainWindow::loadGameIntoFile()
 {
+    qDebug() << PCG32::next();
     QFile file("../../files/save.txt");
     if (!file.open(QIODevice::WriteOnly)) {
         throw QFileDevice::OpenError;
@@ -252,6 +269,10 @@ void MainWindow::loadGameIntoFile()
         {
             out << 8 << ' ';
         }
+        else if(figures[i]->getTypeOfFigure() == TypesOfFigures::type::DiagonalStick2Type)
+        {
+            out << 9 << ' ';
+        }
 
         out << figures[i]->rotation() << ' ' << figures[i]->pos().x();
 
@@ -298,6 +319,10 @@ void MainWindow::generateFigureWithType(GameField *field, int numberOfType, int 
     else if(numberOfType == 8)
     {
         figures.push_back(new BigLTypeFigure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
+    }
+    else if(numberOfType == 9)
+    {
+        figures.push_back(new DiagonalStick2Figure(qUnit, field, QPointF(posX, 10.5 * qUnit)));
     }
 
     field->scene()->addItem(figures.back());
