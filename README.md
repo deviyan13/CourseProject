@@ -1,2 +1,2 @@
 # Coorsach
-It's repository of my Kursovoy Project second sem IiTP
+It's repository of my Course Project second sem IiTP
